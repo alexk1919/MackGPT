@@ -15,12 +15,12 @@ const DefaultLayout = (props: LayoutProps) => {
   return (
     <div
       className={clsx(
-        "flex flex-col bg-gradient-to-b from-[#4A3A2E] to-[#3A2A1E]",
+        "flex flex-col bg-gradient-to-b from-[#67B26F] to-[#4ca2cd]",
         props.centered && "items-center justify-center"
       )}
     >
       <Head>
-        <title>MAckGPT</title>
+        <title>MackGPT</title>
         <meta name="description" content={description} />
         <meta name="twitter:site" content="@MackGPT_com" />
         <meta name="twitter:card" content="summary_large_image" />
