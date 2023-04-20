@@ -48,6 +48,8 @@ const DefaultLayout = (props: LayoutProps) => {
         <meta property="og:image:width" content="1280" />
         <meta property="og:image:height" content="640" />
         <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="MackGPT" />
+        <meta google-site-verification="jB8mvkTK5qNKPnyEcUE1k6T-7zi2dwKQ48-abLSledg" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <DottedGridBackground
