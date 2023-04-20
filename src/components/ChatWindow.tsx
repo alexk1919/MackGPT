@@ -297,7 +297,7 @@ const DonationMessage = () => {
         <Button
           className="sm:text m-0 rounded-full text-sm "
           onClick={() =>
-            void router.push("https://github.com/sponsors/reworkd-admin")
+            void router.push("https://github.com/sponsors/alexk1919")
           }
         >
           Support now 🚀

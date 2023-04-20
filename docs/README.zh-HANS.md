@@ -37,7 +37,7 @@
 </p>
 
 <p align="center">
-<a href="https://github.com/sponsors/reworkd-admin">👉 点击此处</a> 支持项目
+<a href="https://github.com/sponsors/alexk1919">👉 点击此处</a> 支持项目
 </p>
 
 <h3 align="center">

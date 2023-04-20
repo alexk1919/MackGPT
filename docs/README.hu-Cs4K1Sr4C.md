@@ -36,7 +36,7 @@ Ennek az ingyenes, nyílt forráskódú projektnek a szponzorálásával nem csa
 </p>
 
 <p align="center">
-<a href="https://github.com/sponsors/reworkd-admin">👉 Kattint ide</a> ha szeretnéd támogatni a projektet
+<a href="https://github.com/sponsors/alexk1919">👉 Kattint ide</a> ha szeretnéd támogatni a projektet
 </p>
 
 <h3 align="center">

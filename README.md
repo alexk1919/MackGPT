@@ -36,7 +36,7 @@ By sponsoring this free, open-source project, you not only have the opportunity 
 </p>
 
 <p align="center">
-<a href="https://github.com/sponsors/reworkd-admin">👉 Click here</a> to support the project 
+<a href="https://github.com/sponsors/alexk1919">👉 Click here</a> to support the project 
 </p>
 
 <h3 align="center">
