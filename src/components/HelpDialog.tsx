@@ -29,7 +29,7 @@ export default function HelpDialog({
           <br />
           <p className="mt-2">Follow the journey below:</p>
         </div>
-        <div className="mt-4 flex w-full items-center justify-center gap-5">
+        {/* <div className="mt-4 flex w-full items-center justify-center gap-5">
           <div
             className="cursor-pointer rounded-full bg-black/30 p-3 hover:bg-black/70"
             onClick={() =>
@@ -37,28 +37,28 @@ export default function HelpDialog({
             }
           >
             <FaDiscord size={30} />
-          </div>
-          <div
-            className="cursor-pointer rounded-full bg-black/30 p-3 hover:bg-black/70"
-            onClick={() =>
-              window.open(
-                "https://twitter.com/asimdotshrestha/status/1644883727707959296",
-                "_blank"
-              )
-            }
-          >
-            <FaTwitter size={30} />
-          </div>
-          <div
-            className="cursor-pointer rounded-full bg-black/30 p-3 hover:bg-black/70"
-            onClick={() =>
-              window.open("https://github.com/reworkd/AgentGPT", "_blank")
-            }
-          >
-            <FaGithub size={30} />
-          </div>
+          </div> */}
+        <div
+          className="cursor-pointer rounded-full bg-black/30 p-3 hover:bg-black/70"
+          onClick={() =>
+            window.open(
+              "https://twitter.com/MackGPT_com",
+              "_blank"
+            )
+          }
+        >
+          <FaTwitter size={30} />
+        </div>
+        <div
+          className="cursor-pointer rounded-full bg-black/30 p-3 hover:bg-black/70"
+          onClick={() =>
+            window.open("https://github.com/alexk1919/mackgpt", "_blank")
+          }
+        >
+          <FaGithub size={30} />
         </div>
       </div>
-    </Dialog>
+    </div>
+    </Dialog >
   );
 }
