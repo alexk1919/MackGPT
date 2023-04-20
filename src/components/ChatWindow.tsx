@@ -81,7 +81,7 @@ const ChatWindow = ({
         className={clsx(
           "mb-2 mr-2 ",
           (fullscreen && "max-h-[75vh] flex-grow overflow-auto") ||
-            "window-heights"
+          "window-heights"
         )}
         ref={scrollRef}
         onScroll={handleScroll}
@@ -272,9 +272,8 @@ const ChatMessage = ({ message }: { message: Message }) => {
           </span>
         ) : (
           <span
-            className={`absolute bottom-0 right-0 rounded-full border-2 border-white/30 bg-zinc-800 p-1 px-2 ${
-              showCopy ? "visible" : "hidden"
-            }`}
+            className={`absolute bottom-0 right-0 rounded-full border-2 border-white/30 bg-zinc-800 p-1 px-2 ${showCopy ? "visible" : "hidden"
+              }`}
           >
             <FaCopy className="text-white-300 cursor-pointer" />
           </span>
@@ -290,7 +289,7 @@ const DonationMessage = () => {
   return (
     <div className="mx-2 my-1 flex flex-col gap-2 rounded-lg border-[2px] border-white/10 bg-blue-500/20 p-1 text-center font-mono hover:border-[#1E88E5]/40 sm:mx-4 sm:p-3 sm:text-base md:flex-row">
       <div className="max-w-none flex-grow">
-        💝️ Help support the advancement of AgentGPT. 💝
+        💝️ Help support the advancement of MackGPT. 💝
         <br />
         Please consider sponsoring the project on GitHub.
       </div>

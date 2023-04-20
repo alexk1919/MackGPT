@@ -127,12 +127,12 @@ const Drawer = ({
             onClick={showHelp}
           />
           <DrawerItem icon={<FaCog />} text="Settings" onClick={showSettings} />
-          <DrawerItem
+          {/* <DrawerItem
             icon={<FaGithub />}
             text="GitHub"
             href="https://github.com/reworkd/AgentGPT"
             target="_blank"
-          />
+          /> */}
         </div>
       </div>
     </>

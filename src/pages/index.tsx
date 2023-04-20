@@ -89,7 +89,7 @@ const Home: NextPage = () => {
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement> | React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter'&& !disableDeployAgent) {
+    if (e.key === 'Enter' && !disableDeployAgent) {
       if (!e.shiftKey) {
         // Only Enter is pressed, execute the function
         handleNewGoal();
@@ -104,7 +104,7 @@ const Home: NextPage = () => {
 
   const proTitle = (
     <>
-      AgentGPT<span className="ml-1 text-amber-500/90">Pro</span>
+      MackGPT<span className="ml-1 text-amber-500/90">Pro</span>
     </>
   );
 
@@ -174,20 +174,20 @@ const Home: NextPage = () => {
               <ChatWindow
                 className="sm:mt-4"
                 messages={messages}
-                title={session?.user.subscriptionId ? proTitle : "AgentGPT"}
+                title={session?.user.subscriptionId ? proTitle : "MackGPT"}
                 showDonation={
                   status != "loading" && !session?.user.subscriptionId
                 }
                 onSave={
                   shouldShowSave
                     ? (format) => {
-                        setHasSaved(true);
-                        agentUtils.saveAgent({
-                          goal: goalInput,
-                          name: name,
-                          tasks: messages,
-                        });
-                      }
+                      setHasSaved(true);
+                      agentUtils.saveAgent({
+                        goal: goalInput,
+                        name: name,
+                        tasks: messages,
+                      });
+                    }
                     : undefined
                 }
                 scrollToBottom
@@ -209,7 +209,7 @@ const Home: NextPage = () => {
                   disabled={agent != null}
                   onChange={(e) => setName(e.target.value)}
                   onKeyDown={(e) => handleKeyPress(e)}
-                  placeholder="AgentGPT"
+                  placeholder="MackGPT"
                 />
               </Expand>
               <Expand delay={1.3}>

@@ -129,7 +129,7 @@ export default function SettingsDialog({
     >
       <p>
         Here you can add your OpenAI API key. This will require you to pay for
-        your own OpenAI usage but give you greater access to AgentGPT! You can
+        your own OpenAI usage but give you greater access to MackGPT! You can
         additionally select any model OpenAI offers.
       </p>
       <br />
