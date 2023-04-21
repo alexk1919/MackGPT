@@ -12,7 +12,7 @@ export const createModel = (settings: ModelSettings) =>
     temperature: settings.customTemperature || 0.9,
     modelName:
       settings.customModelName === "" ? GPT_35_TURBO : settings.customModelName,
-    maxTokens: 400,
+    maxTokens: 2000,
   });
 
 export const startGoalPrompt = new PromptTemplate({
