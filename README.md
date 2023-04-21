@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://mackgpt.com/banner.png" height="300"/>
+  <img src="https://mackgpt.com/banner.png"/>
 </p>
 <p align="center">
   <em>🤖 Assemble, configure, and deploy autonomous AI Agents in your browser. 🤖 </em>
