@@ -21,7 +21,7 @@ export default function HelpDialog({
         <p>
           <strong>MackGPT</strong>{" "}
           {t(
-            "allows you to configure and deploy Autonomous AI agents. Name your custom AI and have it embark on any goal imaginable. It will attempt to reach the goal by thinking of tasks to do, executing them, and learning from the results 🚀"
+            "allows you to create, customize and deploy Autonomous AI agents. Name your custom AI and have it embark on any goal. It will attempt to reach the goal by thinking of tasks to do, executing them, and learning from the results 🚀"
           )}
         </p>
         <div>
@@ -55,7 +55,7 @@ export default function HelpDialog({
             )
           }
         >
-          <FaTwitter size={30} />
+          <FaTwitter size={30} /> @MackGPT_com
         </div>
         <div
           className="cursor-pointer rounded-full bg-black/30 p-3 hover:bg-black/70"
@@ -63,10 +63,10 @@ export default function HelpDialog({
             window.open("https://github.com/alexk1919/mackgpt", "_blank")
           }
         >
-          <FaGithub size={30} />
+          <FaGithub size={30} /> MackGPT
         </div>
       </div>
-    
+
     </Dialog >
   );
 }
