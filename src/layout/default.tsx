@@ -11,9 +11,9 @@ interface LayoutProps {
 }
 
 const DefaultLayout = (props: LayoutProps) => {
-  const [ t ] = useTranslation();
+  const [t] = useTranslation();
   const description =
-    t('Assemble, configure, and deploy autonomous AI Agents in your browser.');
+    t('Create, customize, and launch autonomous AI Agents in your browser.');
   return (
     <div
       className={clsx(
@@ -40,7 +40,7 @@ const DefaultLayout = (props: LayoutProps) => {
         />
         <meta
           property="og:description"
-          content="Assemble, configure, and deploy autonomous AI Agents in your browser."
+          content="Create, customize, and launch autonomous AI Agents in your browser."
         />
         <meta property="og:url" content="https://mackgpt.com/" />
         <meta

@@ -168,7 +168,7 @@ const Home: NextPage = () => {
               <div className="mt-1 text-center font-mono text-[0.7em] font-bold text-white">
                 <p>
                   {t(
-                    "Assemble, configure, and deploy autonomous AI Agents in your browser."
+                    "Create, customize, and launch autonomous AI Agents in your browser."
                   )}
                 </p>
               </div>
@@ -185,13 +185,13 @@ const Home: NextPage = () => {
                 onSave={
                   shouldShowSave
                     ? (format) => {
-                        setHasSaved(true);
-                        agentUtils.saveAgent({
-                          goal: goalInput.trim(),
-                          name: name.trim(),
-                          tasks: messages,
-                        });
-                      }
+                      setHasSaved(true);
+                      agentUtils.saveAgent({
+                        goal: goalInput.trim(),
+                        name: name.trim(),
+                        tasks: messages,
+                      });
+                    }
                     : undefined
                 }
                 scrollToBottom

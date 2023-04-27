@@ -2,7 +2,7 @@
   <img src="https://mackgpt.com/banner.png"/>
 </p>
 <p align="center">
-  <em>🤖 Assemble, configure, and deploy autonomous AI Agents in your browser. 🤖 </em>
+  <em>🤖 Create, customize, and launch autonomous AI Agents in your browser. 🤖 </em>
 </p>
 <p align="center">
     <img alt="Node version" src="https://img.shields.io/static/v1?label=node&message=%20%3E=16.0.0&logo=node.js&color=2334D058" />
@@ -36,7 +36,7 @@ By sponsoring this free, open-source project, you not only have the opportunity 
 </p>
 
 <p align="center">
-<a href="https://github.com/sponsors/alexk1919">👉 Click here</a> to support the project 
+<a href="https://github.com/sponsors/alexk1919">👉 Click here</a> to support the project
 </p>
 
 
