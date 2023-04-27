@@ -150,10 +150,10 @@ interface HeaderProps {
   title?: string | ReactNode;
   messages: Message[];
   onSave?: (format: string) => void;
-  messagesForPDF={messages}
+  messagesForPDF: Message[];
 }
 
-const MacWindowHeader = (props: HeaderProps & { messagesForPDF: Message[] }) => {
+const MacWindowHeader = (props: HeaderProps) => {
   const [t] = useTranslation();
   const saveElementAsImage = (elementId: string) => {
     const element = document.getElementById(elementId);
