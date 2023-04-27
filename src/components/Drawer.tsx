@@ -156,7 +156,7 @@ const Drawer = ({
           <DrawerItem
             icon={<FaGithub />}
             text="GitHub"
-            href="https://github.com/reworkd/AgentGPT"
+            href="https://github.com/alexk1919/MackGPT"
             target="_blank"
           />
         </div>
