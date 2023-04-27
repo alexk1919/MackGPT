@@ -178,6 +178,7 @@ const Home: NextPage = () => {
               <ChatWindow
                 className="sm:mt-4"
                 messages={messages}
+                messagesForPDF={messages}
                 title={session?.user.subscriptionId ? proTitle : "MackGPT"}
                 showDonation={
                   status != "loading" && !session?.user.subscriptionId
