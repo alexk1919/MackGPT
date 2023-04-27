@@ -81,7 +81,7 @@ const ChatWindow = ({
         (className ?? "")
       }
     >
-      <MacWindowHeader title={title} messagesForPDF={messages} onSave={onSave} />
+      <MacWindowHeader title={title} messages={messages} messagesForPDF={messages} onSave={onSave} />
       <div
         className={clsx(
           "mb-2 mr-2 ",
