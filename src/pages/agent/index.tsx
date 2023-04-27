@@ -43,6 +43,7 @@ const AgentPage: NextPage = () => {
     >
       <ChatWindow
         messages={messages}
+        messagesForPDF={messages}
         title={getAgent?.data?.name}
         showDonation={false}
         className="min-h-[80vh] md:w-[80%]"

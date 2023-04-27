@@ -44,6 +44,7 @@ const messageListId = "chat-window-message-list";
 
 const ChatWindow = ({
   messages,
+  messagesForPDF,
   children,
   className,
   title,
