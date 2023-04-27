@@ -81,7 +81,7 @@ const ChatWindow = ({
         (className ?? "")
       }
     >
-      <MacWindowHeader title={title} messages={messages} onSave={onSave} />
+      <MacWindowHeader title={title} messagesForPDF={messages} onSave={onSave} />
       <div
         className={clsx(
           "mb-2 mr-2 ",
@@ -173,7 +173,7 @@ const MacWindowHeader = (props: HeaderProps & { messagesForPDF: Message[] }) => 
       .then((dataUrl) => {
         const link = document.createElement("a");
         link.href = dataUrl;
-        link.download = "agent-gpt-output.png";
+        link.download = "MackGPT-Agent.png";
         link.click();
       })
       .catch(console.error);
