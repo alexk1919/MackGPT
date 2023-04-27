@@ -150,9 +150,10 @@ interface HeaderProps {
   title?: string | ReactNode;
   messages: Message[];
   onSave?: (format: string) => void;
+  messagesForPDF={messages}
 }
 
-const MacWindowHeader = (props: HeaderProps) => {
+const MacWindowHeader = (props: HeaderProps & { messagesForPDF: Message[] }) => {
   const [t] = useTranslation();
   const saveElementAsImage = (elementId: string) => {
     const element = document.getElementById(elementId);
@@ -222,7 +223,7 @@ const MacWindowHeader = (props: HeaderProps) => {
       icon={<FaClipboard size={12} />}
       name={t("Copy")}
     />,
-    <PDFButton key="PDF" name="PDF" messages={props.messages} />,
+    <PDFButton key="PDF" name="PDF" messages={props.messagesForPDF} />,
   ];
 
   return (

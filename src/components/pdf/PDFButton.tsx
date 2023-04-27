@@ -14,7 +14,8 @@ const PDFButton = ({
   messages: Message[];
   name: string;
 }) => {
-  const content = getContent(messages);
+  const { t } = useTranslation(); // Destructure the translation function from the hook
+  const content = getContent(messages, t); // Pass the translation function as an argument
 
   const downloadPDF = async () => {
     const MyDocument = (await import("./MyDocument")).default as React.FC<{
@@ -44,27 +45,7 @@ const PDFButton = ({
   );
 };
 
-// ORIGINAL - REMOVE AFTER TEST
-// const getContent = (messages: Message[]): string => {
-//   const [t] = useTranslation();
-//   // Note "Thinking" messages have no `value` so they show up as new lines
-//   return messages
-//     .map((message) => {
-//       if (message.type == MESSAGE_TYPE_GOAL) {
-//         return `${t("Goal: ")}${message.value}`;
-//       }
-//       if (message.type == MESSAGE_TYPE_TASK) {
-//         return `${t("Adding Task: ")}${message.value}`;
-//       }
-//       return message.value;
-//     })
-//     .join("\n");
-// };
-
-// NEW PDF CONTENT USING THE ENTIRE TEXT
-const getContent = (messages: Message[]): string => {
-  const [t] = useTranslation();
-
+const getContent = (messages: Message[], t: (key: string) => string): string => {
   const contentElement = document.createElement("div");
 
   contentElement.innerHTML = messages
@@ -81,6 +62,5 @@ const getContent = (messages: Message[]): string => {
 
   return contentElement.innerText;
 };
-
 
 export default memo(PDFButton);
