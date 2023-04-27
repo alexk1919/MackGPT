@@ -121,7 +121,7 @@ const ChatWindow = ({
                 message={{
                   type: MESSAGE_TYPE_SYSTEM,
                   value: t(
-                    "> Create an agent by adding a name / goal, and hitting deploy!"
+                    "> Create an auto AI agent by adding a name / goal, and hitting deploy!"
                   ),
                 }}
               />

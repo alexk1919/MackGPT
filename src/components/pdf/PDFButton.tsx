@@ -25,7 +25,7 @@ const PDFButton = ({
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "my-document.pdf";
+    link.download = "MackGPT-Agent.pdf";
     link.click();
     URL.revokeObjectURL(url);
   };
@@ -44,10 +44,30 @@ const PDFButton = ({
   );
 };
 
+// ORIGINAL - REMOVE AFTER TEST
+// const getContent = (messages: Message[]): string => {
+//   const [t] = useTranslation();
+//   // Note "Thinking" messages have no `value` so they show up as new lines
+//   return messages
+//     .map((message) => {
+//       if (message.type == MESSAGE_TYPE_GOAL) {
+//         return `${t("Goal: ")}${message.value}`;
+//       }
+//       if (message.type == MESSAGE_TYPE_TASK) {
+//         return `${t("Adding Task: ")}${message.value}`;
+//       }
+//       return message.value;
+//     })
+//     .join("\n");
+// };
+
+// NEW PDF CONTENT USING THE ENTIRE TEXT
 const getContent = (messages: Message[]): string => {
   const [t] = useTranslation();
-  // Note "Thinking" messages have no `value` so they show up as new lines
-  return messages
+
+  const contentElement = document.createElement("div");
+
+  contentElement.innerHTML = messages
     .map((message) => {
       if (message.type == MESSAGE_TYPE_GOAL) {
         return `${t("Goal: ")}${message.value}`;
@@ -57,7 +77,10 @@ const getContent = (messages: Message[]): string => {
       }
       return message.value;
     })
-    .join("\n");
+    .join("<br>");
+
+  return contentElement.innerText;
 };
+
 
 export default memo(PDFButton);
