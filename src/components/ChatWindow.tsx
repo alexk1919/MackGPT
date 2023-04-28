@@ -81,7 +81,7 @@ const ChatWindow = ({
         (className ?? "")
       }
     >
-      <MacWindowHeader title={title} messages={messages} messagesForPDF={messages} onSave={onSave} />
+      <MacWindowHeader title={title} messages={messages} onSave={onSave} />
       <div
         className={clsx(
           "mb-2 mr-2 ",
@@ -211,7 +211,7 @@ const MacWindowHeader = (props: HeaderProps) => {
       icon={<FaClipboard size={12} />}
       name={t("Copy")}
     />,
-    <PDFButton key="PDF" name="PDF" messages={props.messagesForPDF} />,
+    <PDFButton key="PDF" name="PDF" messages={props.messages} />,
   ];
 
   return (
