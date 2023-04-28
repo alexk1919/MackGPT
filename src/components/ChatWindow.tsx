@@ -44,7 +44,6 @@ const messageListId = "chat-window-message-list";
 
 const ChatWindow = ({
   messages,
-  messagesForPDF,
   children,
   className,
   title,
@@ -140,7 +139,6 @@ interface HeaderProps {
   title?: string | ReactNode;
   messages: Message[];
   onSave?: (format: string) => void;
-  messagesForPDF: Message[];
 }
 
 const MacWindowHeader = (props: HeaderProps) => {
