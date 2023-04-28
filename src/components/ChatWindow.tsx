@@ -44,7 +44,6 @@ const messageListId = "chat-window-message-list";
 
 const ChatWindow = ({
   messages,
-  messagesForPDF,
   children,
   className,
   title,
@@ -82,7 +81,7 @@ const ChatWindow = ({
         (className ?? "")
       }
     >
-      <MacWindowHeader title={title} messages={messages} messagesForPDF={messages} onSave={onSave} />
+      <MacWindowHeader title={title} messages={messages} onSave={onSave} />
       <div
         className={clsx(
           "mb-2 mr-2 ",
@@ -140,7 +139,6 @@ interface HeaderProps {
   title?: string | ReactNode;
   messages: Message[];
   onSave?: (format: string) => void;
-  messagesForPDF: Message[];
 }
 
 const MacWindowHeader = (props: HeaderProps) => {
@@ -213,7 +211,7 @@ const MacWindowHeader = (props: HeaderProps) => {
       icon={<FaClipboard size={12} />}
       name={t("Copy")}
     />,
-    <PDFButton key="PDF" name="PDF" messages={props.messagesForPDF} />,
+    <PDFButton key="PDF" name="PDF" messages={props.messages} />,
   ];
 
   return (
