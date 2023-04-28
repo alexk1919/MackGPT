@@ -28,7 +28,7 @@
   "Higher values will make the output more random, while lower values make the output more focused and deterministic.": "更高的值会使输出更加随机，而较低的值会使输出更加集中和确定性。",
   "Controls the maximum number of loops that the agent will run (higher value will make more API calls).": "控制代理程序运行的最大循环次数（较高的值会产生更多的API调用）。",
   "Settings ⚙": "设置 ⚙",
-  "Here you can add your OpenAI API key. This will require you to pay for your own OpenAI usage but give you greater access to MackGPT! You can additionally select any model OpenAI offers.": "在这里，您可以添加您的OpenAI API密钥。这将要求您为自己的OpenAI使用付费，但会为您提供更大的访问AgentGPT的权限！您还可以选择OpenAI提供的任何模型。",
+  "Here you can add your OpenAI API key. This will require you to pay for your own OpenAI usage but give you greater access to MackGPT! You can additionally select any model OpenAI offers.": "在这里，您可以添加您的OpenAI API密钥。这将要求您为自己的OpenAI使用付费，但会为您提供更大的访问MackGPT的权限！您还可以选择OpenAI提供的任何模型。",
   "To use the GPT-4 model, you need to also provide the API key for GPT-4. You can request for it": "要使用GPT-4模型，您还需要提供GPT-4的API密钥。 您可以在此处申请",
   "here": "这里",
   "(ChatGPT Plus subscription will not work)": "(ChatGPT Plus订阅不起作用)",
