@@ -13,7 +13,7 @@ const config = {
   reactStrictMode: true,
   /* If trying out the experimental appDir, comment the i18n config out
    * @see https://github.com/vercel/next.js/issues/41980 */
-  i18n:nextI18NextConfig.i18n,
+  i18n: nextI18NextConfig.i18n,
   webpack: function (config, options) {
     config.experiments = { asyncWebAssembly: true, layers: true };
     return config;
@@ -24,9 +24,9 @@ export default withSentryConfig(config, {
 
   // Suppresses source map uploading logs during build
   silent: true,
-  org: "reworkd",
-  project: "agentgpt",
-  }, {
+  org: "mackgpt",
+  project: "mackgpt",
+}, {
   // For all available options, see  https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
   // Upload a larger set of source maps for prettier stack traces (increases build time)
   widenClientFileUpload: true,
