@@ -42,8 +42,7 @@ const AgentPage: NextPage = () => {
       centered
     >
       <ChatWindow
-        messages={messages}
-        messagesForPDF={messages}
+        messages={messages.filter((m) => m.type !== "thinking")}
         title={getAgent?.data?.name}
         showDonation={false}
         className="min-h-[80vh] md:w-[80%]"
