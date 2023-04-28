@@ -6,7 +6,7 @@ import { z } from "zod";
 
 const UUID_KEY = "uuid";
 
-type Provider = "google" | "github";
+type Provider = "google" | "github" | "discord";
 
 interface Auth {
   signIn: (provider?: Provider) => any;
