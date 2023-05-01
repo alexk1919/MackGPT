@@ -7,6 +7,7 @@ import {
   FaExclamationCircle,
   FaSyncAlt,
   FaCoins,
+  FaTachometerAlt,
 } from "react-icons/fa";
 import Dialog from "./Dialog";
 import Input from "./Input";
@@ -16,6 +17,8 @@ import type { ModelSettings, SettingModel } from "../utils/types";
 import LanguageCombobox from "./LanguageCombobox";
 import clsx from "clsx";
 import { useTypeSafeTranslation } from "../hooks/useTypeSafeTranslation";
+import { AUTOMATIC_MODE, PAUSE_MODE } from "../types/agentTypes";
+import { useAgentStore } from "../components/stores";
 
 export const SettingsDialog: React.FC<{
   show: boolean;
@@ -26,6 +29,9 @@ export const SettingsDialog: React.FC<{
     ...customSettings.settings,
   });
   const t = useTypeSafeTranslation();
+  const agent = useAgentStore.use.agent();
+  const agentMode = useAgentStore.use.agentMode();
+  const updateAgentMode = useAgentStore.use.updateAgentMode();
 
   useEffect(() => {
     setSettings(customSettings.settings);
@@ -160,33 +166,43 @@ export const SettingsDialog: React.FC<{
       contentClassName="text-md relative flex flex-col gap-2 p-2 leading-relaxed"
     >
       <p>
-        Here you can add your OpenAI API key. This will require you to pay for
-        your own OpenAI usage but give you greater access to MackGPT! You can
-        additionally select any model OpenAI offers.
+        Get your own OpenAI API key{" "}
+        <a className="link" href="https://platform.openai.com/account/api-keys">
+          here
+        </a>
+        . Ensure you have free credits available on your account, otherwise you{" "}
+        <a
+          className="link"
+          href="https://platform.openai.com/account/billing/overview"
+        >
+          must connect a credit card
+        </a>
+        .
       </p>
-      <p
-        className={clsx(
-          "my-2",
-          settings.customModelName === GPT_4 &&
+      {settings.customModelName === GPT_4 && (
+        <p
+          className={clsx(
+            "my-2",
             "rounded-md border-[2px] border-white/10 bg-yellow-300 text-black"
-        )}
-      >
-        <FaExclamationCircle className="inline-block" />
-        &nbsp;
-        <b>
-          {t(
-            "To use the GPT-4 model, you need to also provide the API key for GPT-4. You can request for it"
           )}
+        >
+          <FaExclamationCircle className="inline-block" />
           &nbsp;
-          <a
-            href="https://openai.com/waitlist/gpt-4-api"
-            className="text-blue-500"
-          >
-            {t("here")}
-          </a>
-          .&nbsp; {t("(ChatGPT Plus subscription will not work)")}
-        </b>
-      </p>
+          <b>
+            {t(
+              "To use the GPT-4 model, you need to also provide the API key for GPT-4. You can request for it"
+            )}
+            &nbsp;
+            <a
+              href="https://openai.com/waitlist/gpt-4-api"
+              className="text-blue-500"
+            >
+              {t("here")}
+            </a>
+            .&nbsp; {t("(ChatGPT Plus subscription will not work)")}
+          </b>
+        </p>
+      )}
       <Input
         left={
           <>
@@ -214,19 +230,25 @@ export const SettingsDialog: React.FC<{
         attributes={{ options: GPT_MODEL_NAMES }}
         disabled={disabled}
       />
+      <Input
+        left={
+          <>
+            <FaTachometerAlt />
+            <span className="ml-2">Mode: </span>
+          </>
+        }
+        value={agentMode}
+        disabled={agent !== null}
+        onChange={() => null}
+        setValue={updateAgentMode as (agentMode: string) => void}
+        type="combobox"
+        toolTipProperties={{
+          message: `${AUTOMATIC_MODE} (Default): Agent automatically executes every task. \n\n${PAUSE_MODE}: Agent pauses after every set of task(s)`,
+          disabled: false,
+        }}
+        attributes={{ options: [AUTOMATIC_MODE, PAUSE_MODE] }}
+      />
       <Accordion child={advancedSettings} name={t("Advanced Settings")} />
-      <strong className="mt-4">
-        {t(
-          "NOTE: To get a key, sign up for an OpenAI account and visit the following"
-        )}{" "}
-        <a
-          href="https://platform.openai.com/account/api-keys"
-          className="text-blue-500"
-        >
-          {t("link")}.
-        </a>{" "}
-        {t("This key is only used in the current browser session")}
-      </strong>
     </Dialog>
   );
 };
