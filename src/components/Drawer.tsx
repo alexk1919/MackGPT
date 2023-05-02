@@ -286,7 +286,7 @@ const AuthItem: React.FC<{
   const text = session?.user
     ? `${t("SIGN_IN", { ns: "drawer" })}`
     : `${t("SIGN_OUT", { ns: "drawer" })}`;
-  const onClick = session?.user ? signOut : signIn;
+  const onClick = session?.user ? signIn : signOut;
 
   return <DrawerItem icon={icon} text={text} onClick={onClick} />;
 };
