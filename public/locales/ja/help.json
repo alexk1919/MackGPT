@@ -1,5 +1,5 @@
 {
-  "WELCOME_TO_AGENT_GPT": "AgentGPTへようこそ",
+  "WELCOME_TO_AGENT_GPT": "MackGPTへようこそ",
   "INTRODUCING_AGENTGPT": "は、ブラウザーで独自のAIエージェントを構成して実行することができます。独自のAIエージェントに名前を付け、目標を定義します。AIエージェントは、タスクを作成し、実行し、結果を評価することで、指定された目標を達成しようとします 🚀",
   "PLATFORM_BETA_DESCRIPTION": "このプラットフォームは現在ベータ版です。現在、以下に取り組んでいます：",
   "LONG_TERM_MEMORY": "長期的な記憶 🧠",

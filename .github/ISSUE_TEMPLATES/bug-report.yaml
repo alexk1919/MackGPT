@@ -52,14 +52,14 @@ body:
         4. Observe the error.
     validations:
       required: true
-      
+
   - type: textarea
     id: possible-solution
     attributes:
       label: Possible solution
       description: |
-        Not obligatory, but please suggest a fix or reason for the bug, if you have an idea.  
-      
+        Not obligatory, but please suggest a fix or reason for the bug, if you have an idea.
+
 
   - type: checkboxes
     id: operating-systems
@@ -81,12 +81,12 @@ body:
       placeholder: 13
     validations:
       required: true
-      
+
   - type: input
-    id: AgentGPT-version
+    id: MackGPT-version
     attributes:
-      label: AgentGPT Version
-      description: Which AgentGPT version are you using?
+      label: MackGPT Version
+      description: Which MackGPT version are you using?
       placeholder: v0.2.0 Beta 2.0
     validations:
       required: true
@@ -101,7 +101,7 @@ body:
           required: true
         - label: 'I have searched the existing issues to make sure this bug has not been reported yet.'
           required: true
-        - label: 'I am using the latest version of AgentGPT.'
+        - label: 'I am using the latest version of MackGPT.'
           required: true
         - label: 'I have provided enough information for the maintainers to reproduce and diagnose the issue.'
           required: true
