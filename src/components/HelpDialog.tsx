@@ -19,7 +19,7 @@ export default function HelpDialog({
     >
       <div className="text-md relative flex-auto p-2 leading-relaxed">
         <p>
-          <strong>AgentGPT</strong> {t("INTRODUCING_AGENTGPT", { ns: "help" })}
+          <strong>MackGPT</strong> {t("INTRODUCING_AGENTGPT", { ns: "help" })}
         </p>
         <div>
           {t("TO_LEARN_MORE_ABOUT_AGENTGPT", {

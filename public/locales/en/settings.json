@@ -6,7 +6,7 @@
   "TOKENS": "Tokens",
   "CONTROL_MAXIMUM_OF_TOKENS_DESCRIPTION": "Controls the maximum number of tokens used in each API call (higher value will make responses more detailed but cost more).",
   "SETTINGS_DIALOG_HEADER": "Settings ⚙",
-  "HERE_YOU_CAN_ADD_YOUR_OPENAI_API_KEY": "Here you can add your OpenAI API key. This will require you to pay for your own OpenAI usage but give you greater access to AgentGPT! You can additionally select any model OpenAI offers.",
+  "HERE_YOU_CAN_ADD_YOUR_OPENAI_API_KEY": "Here you can add your OpenAI API key. This will require you to pay for your own OpenAI usage but give you greater access to MackGPT! You can additionally select any model OpenAI offers.",
   "INFO_TO_USE_GPT4": "To use the GPT-4 model, you need to also provide the API key for GPT-4. You can request for it",
   "HERE": "here",
   "SUBSCRIPTION_WILL_NOT_WORK": "(ChatGPT Plus subscription will not work)",

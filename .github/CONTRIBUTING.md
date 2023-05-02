@@ -1,6 +1,6 @@
-# Contributing to AgentGPT
+# Contributing to MackGPT
 
-First of all, thank you for your interest in contributing to AgentGPT! We appreciate the time and effort you're willing to invest in making our project better. This document provides guidelines and information to make the contribution process as smooth as possible.
+First of all, thank you for your interest in contributing to MackGPT! We appreciate the time and effort you're willing to invest in making our project better. This document provides guidelines and information to make the contribution process as smooth as possible.
 
 ## Table of Contents
 
@@ -17,7 +17,7 @@ First of all, thank you for your interest in contributing to AgentGPT! We apprec
 
 ## Code of Conduct
 
-All contributors are expected to adhere to our [Code of Conduct](CODE_OF_CONDUCT.md). Please read it before participating in the AgentGPT community.
+All contributors are expected to adhere to our [Code of Conduct](CODE_OF_CONDUCT.md). Please read it before participating in the MackGPT community.
 
 ## Getting Started
 
@@ -29,7 +29,7 @@ All contributors are expected to adhere to our [Code of Conduct](CODE_OF_CONDUCT
 
 ### Reporting Bugs
 
-If you encounter a bug or issue while using AgentGPT, please open a new issue on the [GitHub Issues](https://github.com/reworkd/AgentGPT/issues) page. Provide a clear and concise description of the problem, steps to reproduce it, and any relevant error messages or logs.
+If you encounter a bug or issue while using MackGPT, please open a new issue on the [GitHub Issues](https://github.com/reworkd/AgentGPT/issues) page. Provide a clear and concise description of the problem, steps to reproduce it, and any relevant error messages or logs.
 
 ### Suggesting Enhancements
 
@@ -48,7 +48,7 @@ We welcome ideas for improvements and new features. To suggest an enhancement, o
 
 ### Code Style
 
-AgentGPT uses [ESLint](https://eslint.org/) as its code style guide. Please ensure that your code follows these guidelines. 
+MackGPT uses [ESLint](https://eslint.org/) as its code style guide. Please ensure that your code follows these guidelines.
 
 ### Commit Messages
 
@@ -60,5 +60,5 @@ Write clear and concise commit messages that briefly describe the changes made i
 - [GitHub Pull Request Documentation](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests)
 - [ESLint Style Guide](https://eslint.org/)
 
-Thank you once again for your interest in contributing to AgentGPT. We look forward to collaborating with you and creating an even better project together!
+Thank you once again for your interest in contributing to MackGPT. We look forward to collaborating with you and creating an even better project together!
 
