@@ -11,6 +11,7 @@ import {
   FaRocket,
   FaSignInAlt,
   FaSignOutAlt,
+  FaTiktok,
   FaTwitter,
   FaUser,
 } from "react-icons/fa";
