@@ -61,8 +61,8 @@ export default function HelpDialog({
           }
         >
           <FaGithub size={30} /> MackGPT
-        </div>
-      </div> */}
+        </div>*/}
+      </div>
 
     </Dialog >
   );
