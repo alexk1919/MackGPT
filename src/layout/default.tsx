@@ -39,7 +39,7 @@ const DefaultLayout = (props: LayoutProps) => {
           content="MackGPT: Autonomous AI Agents in your browser 🤖"
         />
         <meta property="og:description" content={description} />
-        <meta property="og:url" content="https://agentgpt.reworkd.ai/" />
+        <meta property="og:url" content="https://mackgpt.com/" />
         <meta
           property="og:image"
           content="https://mackgpt.com/banner.png"
