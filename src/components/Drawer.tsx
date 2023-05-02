@@ -204,7 +204,7 @@ const Drawer = ({
                 />
               }
               text="TikTok"
-              href="hhttps://www.tiktok.com/@mackgpt"
+              href="https://www.tiktok.com/@mackgpt"
               target="_blank"
               small
             />
