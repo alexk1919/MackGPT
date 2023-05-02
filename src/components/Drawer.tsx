@@ -82,7 +82,7 @@ const Drawer = ({
   };
 
   const handleSupport = () => {
-    const donationUrl = "https://github.com/sponsors/reworkd-admin";
+    const donationUrl = "https://github.com/sponsors/alexk1919/";
     window.open(donationUrl, "_blank");
   };
 
@@ -183,19 +183,7 @@ const Drawer = ({
           />
           <FadingHr className="my-2" />
           <div className="flex flex-row items-center">
-            <DrawerItem
-              icon={
-                <FaDiscord
-                  size={30}
-                  className="transition-colors group-hover:fill-current group-hover:text-indigo-400"
-                />
-              }
-              text="Discord"
-              href="https://discord.gg/jdSBAnmdnY"
-              target="_blank"
-              small
-            />
-            <DrawerItem
+          <DrawerItem
               icon={
                 <FaTwitter
                   size={30}
@@ -203,7 +191,19 @@ const Drawer = ({
                 />
               }
               text="Twitter"
-              href="https://twitter.com/asimdotshrestha/status/1644883727707959296"
+              href="https://twitter.com/mackgpt_com"
+              target="_blank"
+              small
+            />
+            <DrawerItem
+              icon={
+                <FaTiktok
+                  size={30}
+                  className="transition-colors group-hover:fill-current group-hover:text-sky-500"
+                />
+              }
+              text="TikTok"
+              href="hhttps://www.tiktok.com/@mackgpt"
               target="_blank"
               small
             />
@@ -215,7 +215,7 @@ const Drawer = ({
                 />
               }
               text="GitHub"
-              href="https://github.com/reworkd/AgentGPT"
+              href="https://github.com/alexk1919/MackGPT"
               target="_blank"
               small
             />
