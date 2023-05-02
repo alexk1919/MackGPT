@@ -24,17 +24,18 @@ import {
 } from "../types/agentTypes";
 import clsx from "clsx";
 import { getMessageContainerStyle, getTaskStatusIcon } from "./utils/helpers";
-import type { Translation } from "../utils/types";
-import { useAgentStore } from "../components/stores";
+import { useAgentStore } from "./stores";
 import { AnimatePresence } from "framer-motion";
 import { CgExport } from "react-icons/cg";
 import MarkdownRenderer from "./MarkdownRenderer";
+import { Switch } from "./Switch";
 
 interface ChatWindowProps extends HeaderProps {
   children?: ReactNode;
   className?: string;
   fullscreen?: boolean;
   scrollToBottom?: boolean;
+  displaySettings?: boolean; // Controls if settings are displayed at the bottom of the ChatWindow
 }
 
 const messageListId = "chat-window-message-list";
@@ -47,6 +48,7 @@ const ChatWindow = ({
   onSave,
   fullscreen,
   scrollToBottom,
+  displaySettings,
 }: ChatWindowProps) => {
   const [t] = useTranslation();
   const [hasUserScrolled, setHasUserScrolled] = useState(false);
@@ -54,6 +56,8 @@ const ChatWindow = ({
   const isAgentPaused = useAgentStore.use.isAgentPaused();
   const agentMode = useAgentStore.use.agentMode();
   const agent = useAgentStore.use.agent();
+  const isWebSearchEnabled = useAgentStore.use.isWebSearchEnabled();
+  const setIsWebSearchEnabled = useAgentStore.use.setIsWebSearchEnabled();
 
   const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
     const { scrollTop, scrollHeight, clientHeight } = event.currentTarget;
@@ -115,7 +119,7 @@ const ChatWindow = ({
               <ChatMessage
                 message={{
                   type: MESSAGE_TYPE_SYSTEM,
-                  value: "👉 " + t("CREATE_AN_AGENT"),
+                  value: "👉 " + t("CREATE_AN_AGENT_DESCRIPTION"),
                 }}
               />
             </Expand>
@@ -123,13 +127,24 @@ const ChatWindow = ({
               <ChatMessage
                 message={{
                   type: MESSAGE_TYPE_SYSTEM,
-                  value: `📢 ${t("YOU_CAN_PROVIDE_YOUR_OWN_OPENAI_KEY")}`,
+                  value: `${t("YOU_CAN_PROVIDE_YOUR_API_KEY", { ns: "chat" })}`,
                 }}
               />
             </Expand>
           </>
         )}
       </div>
+      {displaySettings && (
+        <div className="flex items-center justify-center">
+          <div className="m-1 flex items-center gap-2 rounded-lg border-[2px] border-white/20 bg-zinc-700 px-2 py-1">
+            <p className="font-mono text-sm">Web search</p>
+            <Switch
+              value={isWebSearchEnabled}
+              onChange={setIsWebSearchEnabled}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
@@ -203,13 +218,13 @@ const MacWindowHeader = (props: HeaderProps) => {
       key="Image"
       onClick={(): void => saveElementAsImage(messageListId)}
       icon={<FaImage size={12} />}
-      name={`${t("Image")}`}
+      name={`${t("IMAGE", { ns: "common" })}`}
     />,
     <WindowButton
       key="Copy"
       onClick={(): void => copyElementText(messageListId)}
       icon={<FaClipboard size={12} />}
-      name={`${t("Copy")}`}
+      name={`${t("COPY", { ns: "common" })}`}
     />,
     <PDFButton key="PDF" name="PDF" messages={props.messages} />,
   ];
@@ -240,7 +255,7 @@ const MacWindowHeader = (props: HeaderProps) => {
               key="Agent"
               onClick={() => props.onSave?.("db")}
               icon={<FaSave size={12} />}
-              name={`${t("Save")}`}
+              name={`${t("SAVE", { ns: "common" })}`}
               styleClass={{
                 container: `relative bg-[#3a3a3a] md:w-20 text-center font-mono rounded-lg text-gray/50 border-[2px] border-white/30 font-bold transition-all sm:py-0.5 hover:border-[#1E88E5]/40 hover:bg-[#6b6b6b] focus-visible:outline-none focus:border-[#1E88E5]`,
               }}
@@ -269,7 +284,7 @@ const MacWindowHeader = (props: HeaderProps) => {
 
       <Menu
         icon={<CgExport />}
-        name={`${t("Export")}`}
+        name={`${t("EXPORT", { ns: "common" })}`}
         onChange={() => null}
         items={exportOptions}
         styleClass={{
@@ -281,13 +296,7 @@ const MacWindowHeader = (props: HeaderProps) => {
     </div>
   );
 };
-const ChatMessage = ({
-  message,
-  className,
-}: {
-  message: Message;
-  className?: string;
-}) => {
+const ChatMessage = ({ message }: { message: Message }) => {
   const [t] = useTranslation();
 
   return (
@@ -302,13 +311,17 @@ const ChatMessage = ({
           <div className="mr-2 inline-block h-[0.9em]">
             {getTaskStatusIcon(message, {})}
           </div>
-          <span className="mr-2 font-bold">{getMessagePrefix(message, t)}</span>
+          <span className="mr-2 font-bold">
+            {t(getMessagePrefix(message), { ns: "chat" })}
+          </span>
         </>
       )}
 
       {message.type == MESSAGE_TYPE_THINKING && (
         <span className="italic text-zinc-400">
-          (Redeploy if this takes more than 30 seconds)
+          {`${t("RESTART_IF_IT_TAKES_X_SEC", {
+            ns: "chat",
+          })}`}
         </span>
       )}
 
@@ -321,11 +334,12 @@ const ChatMessage = ({
         </>
       ) : (
         <>
-          <span>{message.value}</span>
+          <span>{t(message.value, { ns: "chat" })}</span>
           {
             // Link to the FAQ if it is a shutdown message
             message.type == MESSAGE_TYPE_SYSTEM &&
-              message.value.toLowerCase().includes("shut") && <FAQ />
+              (message.value.toLowerCase().includes("shut") ||
+                message.value.toLowerCase().includes("error")) && <FAQ />
           }
         </>
       )}
@@ -333,17 +347,18 @@ const ChatMessage = ({
   );
 };
 
-const getMessagePrefix = (message: Message, t: Translation) => {
+// Returns the translation key of the prefix
+const getMessagePrefix = (message: Message) => {
   if (message.type === MESSAGE_TYPE_GOAL) {
-    return t("Embarking on a new goal:");
+    return "EMBARKING_ON_NEW_GOAL";
   } else if (message.type === MESSAGE_TYPE_THINKING) {
-    return t("Thinking...");
+    return "THINKING";
   } else if (getTaskStatus(message) === TASK_STATUS_STARTED) {
-    return t("Added task:");
+    return "TASK_ADDED";
   } else if (getTaskStatus(message) === TASK_STATUS_COMPLETED) {
     return `Completing: ${message.value}`;
   } else if (getTaskStatus(message) === TASK_STATUS_FINAL) {
-    return t("No more subtasks for:");
+    return "NO_MORE_TASKS";
   }
   return "";
 };
@@ -352,7 +367,7 @@ const FAQ = () => {
   return (
     <p>
       <br />
-      If you are facing any issues, please visit our{" "}
+      If you are facing issues, please head over to our{" "}
       <a
         href="https://reworkd.github.io/AgentGPT-Documentation/docs/faq"
         className="text-sky-500"

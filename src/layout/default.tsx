@@ -2,7 +2,7 @@ import { type ReactNode } from "react";
 import Head from "next/head";
 import DottedGridBackground from "../components/DottedGridBackground";
 import clsx from "clsx";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 interface LayoutProps {
   children: ReactNode;
@@ -12,8 +12,8 @@ interface LayoutProps {
 
 const DefaultLayout = (props: LayoutProps) => {
   const [t] = useTranslation();
-  const description =
-    t('Create, customize, and launch autonomous AI Agents in your browser.');
+  const description = t("HEADING_DESCRIPTION", { ns: "indexPage" });
+
   return (
     <div
       className={clsx(
@@ -38,11 +38,8 @@ const DefaultLayout = (props: LayoutProps) => {
           property="og:title"
           content="MackGPT: Autonomous AI Agents in your browser 🤖"
         />
-        <meta
-          property="og:description"
-          content="Create, customize, and launch autonomous AI Agents in your browser."
-        />
-        <meta property="og:url" content="https://mackgpt.com/" />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content="https://agentgpt.reworkd.ai/" />
         <meta
           property="og:image"
           content="https://mackgpt.com/banner.png"
