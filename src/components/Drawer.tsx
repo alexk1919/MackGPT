@@ -184,7 +184,7 @@ const Drawer = ({
           />
           <FadingHr className="my-2" />
           <div className="flex flex-row items-center">
-          <DrawerItem
+            <DrawerItem
               icon={
                 <FaTwitter
                   size={30}
@@ -286,7 +286,7 @@ const AuthItem: React.FC<{
   const text = session?.user
     ? `${t("SIGN_IN", { ns: "drawer" })}`
     : `${t("SIGN_OUT", { ns: "drawer" })}`;
-  const onClick = session?.user ? signIn : signOut;
+  const onClick = session?.user ? signOut : signIn;
 
   return <DrawerItem icon={icon} text={text} onClick={onClick} />;
 };
