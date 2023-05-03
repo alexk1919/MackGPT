@@ -170,6 +170,9 @@ Run the project 🥳
 npm run dev
 ```
 
-### Credits
+### :heart: Credits
 
 This project is based on AgentGPT <a href="https://github.com/reworkd/AgentGPT">GitHub Repo</a>. Our work is derived from or inspired by their efforts under the GPL 3.0 license.
+We greatly appreciate their efforts and the valuable work they have shared with the community.
+Thank you to everyone involved in creating, maintaining, and contributing to this open-source project.
+
