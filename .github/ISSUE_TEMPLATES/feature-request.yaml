@@ -8,9 +8,9 @@ body:
       label: "⚠️ Please check that this feature request hasn't been suggested before."
       description: "There are two locations for previous feature requests. Please search in both. Thank you. The **Label filters** may help make your search more focussed."
       options:
-        - label: "I searched previous [Ideas in Discussions](https://github.com/reworkd/AgentGPT/discussions/categories/ideas) didn't find any similar feature requests."
+        - label: "I searched previous [Ideas in Discussions](https://github.com/alexk1919/MackGPT/discussions/categories/ideas) didn't find any similar feature requests."
           required: true
-        - label: "I searched previous [Issues](https://github.com/reworkd/AgentGPT/labels/enhancement) didn't find any similar feature requests."
+        - label: "I searched previous [Issues](https://github.com/alexk1919/MackGPT/labels/enhancement) didn't find any similar feature requests."
           required: true
 
   - type: textarea
@@ -48,7 +48,7 @@ body:
       label: "📝 Additional Context"
       description: "Add any other context or screenshots about the feature request here."
       placeholder: "..."
-      
+
   - type: checkboxes
     id: acknowledgements
     attributes:

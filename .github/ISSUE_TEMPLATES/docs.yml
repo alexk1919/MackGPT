@@ -8,9 +8,8 @@ body:
   - type: markdown
     attributes:
       value: |
-        * Ask questions in [Discord](https://discord.gg/jjYCfaqu).
-        * Before you file an issue read the [Contributing guide](https://github.com/reworkd/AgentGPT/tree/main/.github/CONTRIBUTING.md).
-        * Check to make sure someone hasn't already opened a [similar issue](https://github.com/reworkd/AgentGPT/issues).
+        * Before you file an issue read the [Contributing guide](https://github.com/alexk1919/MackGPT/tree/main/.github/CONTRIBUTING.md).
+        * Check to make sure someone hasn't already opened a [similar issue](https://github.com/alexk1919/MackGPT/issues).
   - type: textarea
     attributes:
       label: What piece of documentation is affected?
@@ -21,8 +20,8 @@ body:
     attributes:
       label: What part(s) of the article would you like to see updated?
       description: |
-        - Give as much detail as you can to help us understand the change you want to see. 
-        - Why should the docs be changed? What use cases does it support? 
+        - Give as much detail as you can to help us understand the change you want to see.
+        - Why should the docs be changed? What use cases does it support?
         - What is the expected outcome?
     validations:
       required: true

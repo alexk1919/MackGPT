@@ -22,18 +22,18 @@ All contributors are expected to adhere to our [Code of Conduct](CODE_OF_CONDUCT
 ## Getting Started
 
 1. Fork the repository and clone it to your local machine.
-2. Set up the development environment by following the instructions in the [README.md](https://github.com/reworkd/AgentGPT/tree/main/README.md) file.
+2. Set up the development environment by following the instructions in the [README.md](https://github.com/alexk1919/MackGPT/tree/main/README.md) file.
 3. Explore the codebase, run tests, and verify that everything works as expected.
 
 ## How to Contribute
 
 ### Reporting Bugs
 
-If you encounter a bug or issue while using MackGPT, please open a new issue on the [GitHub Issues](https://github.com/reworkd/AgentGPT/issues) page. Provide a clear and concise description of the problem, steps to reproduce it, and any relevant error messages or logs.
+If you encounter a bug or issue while using MackGPT, please open a new issue on the [GitHub Issues](https://github.com/alexk1919/MackGPT/issues) page. Provide a clear and concise description of the problem, steps to reproduce it, and any relevant error messages or logs.
 
 ### Suggesting Enhancements
 
-We welcome ideas for improvements and new features. To suggest an enhancement, open a new issue on the [GitHub Issues](https://github.com/reworkd/AgentGPT/issues) page. Describe the enhancement in detail, explain the use case, and outline the benefits it would bring to the project.
+We welcome ideas for improvements and new features. To suggest an enhancement, open a new issue on the [GitHub Issues](https://github.com/alexk1919/MackGPT/issues) page. Describe the enhancement in detail, explain the use case, and outline the benefits it would bring to the project.
 
 ### Submitting Pull Requests
 
