@@ -13,11 +13,11 @@ export default function HelpDialog({
   const [t] = useTranslation();
   return (
     <Dialog
-      header={t("WELCOME_TO_AGENT_GPT", { ns: "help" })}
+      header={`${t("WELCOME_TO_AGENT_GPT", { ns: "help" })} 🤖`}
       isShown={show}
       close={close}
     >
-      <div className="text-md relative flex-auto p-2 leading-relaxed">
+      <div>
         <p>
           <strong>MackGPT</strong> {t("INTRODUCING_AGENTGPT", { ns: "help" })}
         </p>

@@ -29,6 +29,7 @@ import { AnimatePresence } from "framer-motion";
 import { CgExport } from "react-icons/cg";
 import MarkdownRenderer from "./MarkdownRenderer";
 import { Switch } from "./Switch";
+import { env } from "../env/client.mjs";
 
 interface ChatWindowProps extends HeaderProps {
   children?: ReactNode;
@@ -36,6 +37,8 @@ interface ChatWindowProps extends HeaderProps {
   fullscreen?: boolean;
   scrollToBottom?: boolean;
   displaySettings?: boolean; // Controls if settings are displayed at the bottom of the ChatWindow
+  openSorryDialog?: () => void;
+  setAgentRun?: (name: string, goal: string) => void;
 }
 
 const messageListId = "chat-window-message-list";
@@ -49,6 +52,8 @@ const ChatWindow = ({
   fullscreen,
   scrollToBottom,
   displaySettings,
+  openSorryDialog,
+  setAgentRun,
 }: ChatWindowProps) => {
   const [t] = useTranslation();
   const [hasUserScrolled, setHasUserScrolled] = useState(false);
@@ -75,6 +80,18 @@ const ChatWindow = ({
       }
     }
   });
+
+  const handleChangeWebSearch = (value: boolean) => {
+    // Change this value when we can no longer support web search
+    const WEB_SEARCH_ALLOWED = env.NEXT_PUBLIC_WEB_SEARCH_ENABLED as boolean;
+
+    if (WEB_SEARCH_ALLOWED) {
+      setIsWebSearchEnabled(value);
+    } else {
+      openSorryDialog?.();
+      setIsWebSearchEnabled(false);
+    }
+  };
 
   return (
     <div
@@ -115,36 +132,83 @@ const ChatWindow = ({
 
         {messages.length === 0 && (
           <>
-            <Expand delay={0.8} type="spring">
+            <PopIn delay={0.8}>
               <ChatMessage
                 message={{
                   type: MESSAGE_TYPE_SYSTEM,
-                  value: "👉 " + t("CREATE_AN_AGENT_DESCRIPTION"),
+                  value:
+                    "👉 " + t("CREATE_AN_AGENT_DESCRIPTION", { ns: "chat" }),
                 }}
               />
-            </Expand>
-            <Expand delay={0.9} type="spring">
-              <ChatMessage
-                message={{
-                  type: MESSAGE_TYPE_SYSTEM,
-                  value: `${t("YOU_CAN_PROVIDE_YOUR_API_KEY", { ns: "chat" })}`,
-                }}
-              />
-            </Expand>
+            </PopIn>
+            <PopIn delay={1.5}>
+              <div className="m-2 flex flex-col justify-between gap-2 sm:m-4 sm:flex-row">
+                <ExampleAgentButton
+                  name="PlatformerGPT 🎮"
+                  setAgentRun={setAgentRun}
+                >
+                  Write some code to make a platformer game.
+                </ExampleAgentButton>
+                <ExampleAgentButton
+                  name="TravelGPT 🌴"
+                  setAgentRun={setAgentRun}
+                >
+                  Plan a detailed trip to Hawaii.
+                </ExampleAgentButton>
+                <ExampleAgentButton
+                  name="ResearchGPT 📜"
+                  setAgentRun={setAgentRun}
+                >
+                  Create a comprehensive report of the Nike company
+                </ExampleAgentButton>
+              </div>
+            </PopIn>
           </>
         )}
       </div>
       {displaySettings && (
-        <div className="flex items-center justify-center">
-          <div className="m-1 flex items-center gap-2 rounded-lg border-[2px] border-white/20 bg-zinc-700 px-2 py-1">
-            <p className="font-mono text-sm">Web search</p>
-            <Switch
-              value={isWebSearchEnabled}
-              onChange={setIsWebSearchEnabled}
-            />
+        <>
+          <div className="flex items-center justify-center">
+            <div className="m-1 flex items-center gap-2 rounded-lg border-[2px] border-white/20 bg-zinc-700 px-2 py-1">
+              <p className="font-mono text-sm">Web search</p>
+              <Switch
+                value={isWebSearchEnabled}
+                onChange={handleChangeWebSearch}
+              />
+            </div>
           </div>
-        </div>
+        </>
       )}
+    </div>
+  );
+};
+
+const ExampleAgentButton = ({
+  name,
+  children,
+  setAgentRun,
+}: {
+  name: string;
+  children: string;
+  setAgentRun?: (name: string, goal: string) => void;
+}) => {
+  const handleClick = () => {
+    if (setAgentRun) {
+      setAgentRun(name, children);
+    }
+  };
+
+  return (
+    <div
+      className={clsx(
+        `w-full p-2 sm:w-[33%]`,
+        `cursor-pointer rounded-lg bg-sky-600 font-mono text-sm hover:bg-sky-700 sm:text-base`,
+        `border-[2px] border-white/20 hover:border-[#1E88E5]/40`
+      )}
+      onClick={handleClick}
+    >
+      <p className="text-lg font-black">{name}</p>
+      {children}
     </div>
   );
 };

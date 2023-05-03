@@ -27,8 +27,10 @@ import {
 import { isTask, AGENT_PLAY } from "../types/agentTypes";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useSettings } from "../hooks/useSettings";
-import { languages } from "../utils/languages";
+import { findLanguage, languages } from "../utils/languages";
 import nextI18NextConfig from "../../next-i18next.config.js";
+import { SorryDialog } from "../components/SorryDialog";
+import { SignInDialog } from "../components/SignInDialog";
 
 const Home: NextPage = () => {
   const { i18n } = useTranslation();
@@ -47,12 +49,14 @@ const Home: NextPage = () => {
   const agent = useAgentStore.use.agent();
 
   const { session, status } = useAuth();
-  const [name, setName] = React.useState<string>("");
+  const [nameInput, setNameInput] = React.useState<string>("");
   const [goalInput, setGoalInput] = React.useState<string>("");
   const settingsModel = useSettings();
 
   const [showHelpDialog, setShowHelpDialog] = React.useState(false);
   const [showSettingsDialog, setShowSettingsDialog] = React.useState(false);
+  const [showSorryDialog, setShowSorryDialog] = React.useState(false);
+  const [showSignInDialog, setShowSignInDialog] = React.useState(false);
   const [hasSaved, setHasSaved] = React.useState(false);
   const agentUtils = useAgent();
 
@@ -78,6 +82,16 @@ const Home: NextPage = () => {
     updateIsAgentStopped();
   }, [agent, updateIsAgentStopped]);
 
+  const setAgentRun = (newName: string, newGoal: string) => {
+    if (agent != null) {
+      return;
+    }
+
+    setNameInput(newName);
+    setGoalInput(newGoal);
+    handleNewGoal(newName, newGoal);
+  };
+
   const handleAddMessage = (message: Message) => {
     if (isTask(message)) {
       updateTaskStatus(message);
@@ -95,13 +109,23 @@ const Home: NextPage = () => {
   };
 
   const disableDeployAgent =
-    agent != null || isEmptyOrBlank(name) || isEmptyOrBlank(goalInput);
+    agent != null || isEmptyOrBlank(nameInput) || isEmptyOrBlank(goalInput);
 
-  const handleNewGoal = () => {
+  const handleNewGoal = (name: string, goal: string) => {
+    if (name.trim() === "" || goal.trim() === "") {
+      return;
+    }
+
+    // Do not force login locally for people that don't have auth setup
+    if (session === null && process.env.NODE_ENV === "production") {
+      setShowSignInDialog(true);
+      return;
+    }
+
     const newAgent = new AutonomousAgent(
       name.trim(),
-      goalInput.trim(),
-      i18n.language,
+      goal.trim(),
+      findLanguage(i18n.language).name,
       handleAddMessage,
       handlePause,
       () => setAgent(null),
@@ -136,7 +160,7 @@ const Home: NextPage = () => {
       if (isAgentPaused) {
         handleContinue();
       }
-      handleNewGoal();
+      handleNewGoal(nameInput, goalInput);
     }
   };
 
@@ -164,7 +188,11 @@ const Home: NextPage = () => {
         <span className="ml-2">{i18n.t("Continue")}</span>
       </Button>
     ) : (
-      <Button disabled={disableDeployAgent} onClick={handleNewGoal}>
+      <Button
+        ping={!disableDeployAgent}
+        disabled={disableDeployAgent}
+        onClick={() => handleNewGoal(nameInput, goalInput)}
+      >
         {agent == null ? (
           i18n.t("Deploy Agent")
         ) : (
@@ -186,6 +214,14 @@ const Home: NextPage = () => {
         customSettings={settingsModel}
         show={showSettingsDialog}
         close={() => setShowSettingsDialog(false)}
+      />
+      <SorryDialog
+        show={showSorryDialog}
+        close={() => setShowSorryDialog(false)}
+      />
+      <SignInDialog
+        show={showSignInDialog}
+        close={() => setShowSignInDialog(false)}
       />
       <main className="flex min-h-screen flex-row">
         <Drawer
@@ -237,17 +273,19 @@ const Home: NextPage = () => {
                 onSave={
                   shouldShowSave
                     ? (format) => {
-                      setHasSaved(true);
-                      agentUtils.saveAgent({
-                        goal: goalInput.trim(),
-                        name: name.trim(),
-                        tasks: messages,
-                      });
-                    }
+                        setHasSaved(true);
+                        agentUtils.saveAgent({
+                          goal: goalInput.trim(),
+                          name: nameInput.trim(),
+                          tasks: messages,
+                        });
+                      }
                     : undefined
                 }
                 scrollToBottom
-                // displaySettings (Disable web search)
+                displaySettings
+                openSorryDialog={() => setShowSorryDialog(true)}
+                setAgentRun={setAgentRun}
               />
               {tasks.length > 0 && <TaskWindow />}
             </Expand>
@@ -264,9 +302,9 @@ const Home: NextPage = () => {
                       })}`}</span>
                     </>
                   }
-                  value={name}
+                  value={nameInput}
                   disabled={agent != null}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) => setNameInput(e.target.value)}
                   onKeyDown={(e) => handleKeyPress(e)}
                   placeholder="MackGPT"
                   type="text"
