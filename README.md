@@ -42,6 +42,8 @@ MackGPT allows you to create, customize, and deploy Autonomous AI agents in your
 Name your own custom AI and have it embark on any goal imaginable.
 It will attempt to reach the goal by thinking of tasks to do, executing them, and learning from the results 🚀.
 
+
+
 ## 🎉 Roadmap
 
 This platform is currently in beta, we are currently working on:
@@ -172,7 +174,8 @@ npm run dev
 
 ### :heart: Credits
 
-This project is based on AgentGPT <a href="https://github.com/reworkd/AgentGPT">GitHub Repo</a>. Our work is derived from or inspired by their efforts under the GPL 3.0 license.
+This project is based on AgentGPT <a href="https://github.com/reworkd/AgentGPT">GitHub Repo</a>.
+Our work is derived from or inspired by their efforts under the GPL 3.0 license.
 We greatly appreciate their efforts and the valuable work they have shared with the community.
 Thank you to everyone involved in creating, maintaining, and contributing to this open-source project.
 
