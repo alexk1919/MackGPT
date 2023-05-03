@@ -32,3 +32,18 @@ const MyApp: AppType<{ session: Session | null }> = ({
 };
 
 export default api.withTRPC(appWithTranslation(MyApp, nextI18NextConfig));
+
+
+import type { AppProps } from 'next/app';
+import { Analytics } from '@vercel/analytics/react';
+
+function MyApp({ Component, pageProps }: AppProps) {
+  return (
+    <>
+      <Component {...pageProps} />
+      <Analytics />
+    </>
+  );
+}
+
+export default MyApp;
