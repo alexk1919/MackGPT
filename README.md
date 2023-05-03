@@ -15,8 +15,6 @@
 <a href="#-getting-started">🤝 Contribute</a>
 <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
 <a href="https://twitter.com/MackGPT_com">🐦 Twitter</a>
-<!-- <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-<a href="https://discord.gg/gcmNyAAFfV">📢 Discord</a> -->
 </p>
 
 ---
@@ -26,11 +24,11 @@
 </h2>
 
 <p align="center">
-Join us in fueling the development of MackGPT, an open-source project pushing the boundaries of AI autonomy! We're facing challenges in covering the operational costs 💸, including in-house API and other infrastructure expenses, which is projected to grow to around $1000 USD per day 💳🤕 Your sponsorship would drive progress by helping us scale up resources, enhance features and functionality, and continue to iterate on this exciting project! 🚀
+Boost the development of MackGPT, an open-source project pushing AI autonomy forward! Your support helps cover operational costs, such as in-house API and infrastructure expenses, which are growing daily. Your sponsorship drives progress by facilitating resource scaling, feature improvement, and continuous innovation in this groundbreaking project! 🚀
 </p>
 
 <p align="center">
-By sponsoring this free, open-source project, you not only have the opportunity to have your avatar/logo featured below, but also get the exclusive chance to chat with the founders!🗣️
+By sponsoring this open-source project, you can showcase your avatar/logo below while contributing to the progress of autonomous AI!🗣️
 </p>
 
 <p align="center">
@@ -171,3 +169,7 @@ Run the project 🥳
 ```
 npm run dev
 ```
+
+### Credits
+
+This project is based on AgentGPT <a href="https://github.com/reworkd/AgentGPT">GitHub Repo</a>. Our work is derived from or inspired by their efforts under the GPL 3.0 license.
