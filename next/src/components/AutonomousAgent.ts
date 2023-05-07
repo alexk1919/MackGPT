@@ -1,17 +1,13 @@
 import axios from "axios";
-import type { ModelSettings } from "../utils/types";
-import type { Analysis } from "../services/agent-service";
+import type {ModelSettings} from "../utils/types";
+import type {Analysis} from "../services/agent-service";
 import AgentService from "../services/agent-service";
-import {
-  DEFAULT_MAX_LOOPS_CUSTOM_API_KEY,
-  DEFAULT_MAX_LOOPS_FREE,
-  DEFAULT_MAX_LOOPS_PAID,
-} from "../utils/constants";
-import type { Session } from "next-auth";
-import { env } from "../env/client.mjs";
-import { v1, v4 } from "uuid";
-import type { RequestBody } from "../utils/interfaces";
-import type { AgentMode, AgentPlaybackControl, Message, Task } from "../types/agentTypes";
+import {DEFAULT_MAX_LOOPS_CUSTOM_API_KEY, DEFAULT_MAX_LOOPS_FREE,} from "../utils/constants";
+import type {Session} from "next-auth";
+import {env} from "../env/client.mjs";
+import {v1, v4} from "uuid";
+import type {RequestBody} from "../utils/interfaces";
+import type {AgentMode, AgentPlaybackControl, Message, Task,} from "../types/agentTypes";
 import {
   AGENT_PAUSE,
   AGENT_PLAY,
@@ -26,8 +22,8 @@ import {
   TASK_STATUS_FINAL,
   TASK_STATUS_STARTED,
 } from "../types/agentTypes";
-import { useAgentStore, useMessageStore } from "../stores";
-import { translate } from "../utils/translations";
+import {useAgentStore, useMessageStore} from "./stores";
+import {i18n} from "next-i18next";
 
 const TIMEOUT_LONG = 1000;
 const TIMOUT_SHORT = 800;
@@ -208,13 +204,9 @@ class AutonomousAgent {
   }
 
   private maxLoops() {
-    const defaultLoops = !!this.session?.user.subscriptionId
-      ? DEFAULT_MAX_LOOPS_PAID
-      : DEFAULT_MAX_LOOPS_FREE;
-
     return !!this.modelSettings.customApiKey
       ? this.modelSettings.customMaxLoops || DEFAULT_MAX_LOOPS_CUSTOM_API_KEY
-      : defaultLoops;
+      : DEFAULT_MAX_LOOPS_FREE;
   }
 
   async getInitialTasks(): Promise<string[]> {
