@@ -44,6 +44,8 @@ interface ChatWindowProps extends HeaderProps {
 
 const messageListId = "chat-window-message-list";
 
+const [initialLoad, setInitialLoad] = useState(true);
+
 const ChatWindow = ({
   messages,
   children,
@@ -76,13 +78,21 @@ const ChatWindow = ({
   };
 
   useEffect(() => {
-    // Scroll to bottom on re-renders
-    if (scrollToBottom && scrollRef && scrollRef.current) {
-      if (!hasUserScrolled) {
+    if (scrollRef && scrollRef.current) {
+      if (initialLoad) {
+        scrollRef.current.scrollTop = 0;
+      } else if (scrollToBottom && !hasUserScrolled) {
         scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
       }
     }
   });
+
+  useEffect(() => {
+    if (messages.length > 0) {
+      setInitialLoad(false);
+    }
+  }, [messages]);
+
 
   const handleChangeWebSearch = (value: boolean) => {
     // Change this value when we can no longer support web search
