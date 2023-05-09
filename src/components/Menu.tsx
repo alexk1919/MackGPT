@@ -7,6 +7,7 @@ import clsx from "clsx";
 interface MenuProps {
   icon?: ReactNode;
   name: string;
+  onChange: () => void; 
   items: JSX.Element[];
   styleClass?: { [key: string]: string };
 }
