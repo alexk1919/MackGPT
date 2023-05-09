@@ -1,9 +1,0 @@
-{
-  "BETA": "Beta",
-  "HEADING_DESCRIPTION": "Create, customize, and launch autonomous AI Agents in your browser. 🤖 🚀",
-  "AGENT_NAME": "Name",
-  "LABEL_AGENT_GOAL": "Goal",
-  "PLACEHOLDER_AGENT_GOAL": "Make the world a better place",
-  "BUTTON_DEPLOY_AGENT": "Deploy Agent",
-  "BUTTON_STOP_AGENT": "Stop Agent"
-}
