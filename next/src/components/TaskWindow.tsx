@@ -51,9 +51,11 @@ export const TaskWindow = ({ visibleOnMobile }: TaskWindowProps) => {
               This window will display agent tasks as they are created.
             </p>
           )}
-          {tasks.map((task, i) => (
-            <Task key={i} task={task} />
-          ))}
+          <AnimatePresence mode="popLayout">
+            {tasks.map((task, i) => (
+              <Task key={i} index={i} task={task} />
+            ))}
+          </AnimatePresence>
         </div>
         <div className="flex flex-row gap-1">
           <Input
