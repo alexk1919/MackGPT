@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Enable Pull Request Automerge
-        uses: peter-evans/enable-pull-request-automerge@v2
+        uses: peter-evans/enable-pull-request-automerge@v3
         id: automerge
         with:
           token: ${{ secrets.PAT }}
