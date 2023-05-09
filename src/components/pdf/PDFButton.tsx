@@ -18,7 +18,7 @@ const PDFButton = ({ messages, name }: { messages: Message[]; name: string }) =>
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "my-document.pdf";
+    link.download = "MackGPT-Agent.pdf";
     link.click();
     URL.revokeObjectURL(url);
   };
