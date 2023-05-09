@@ -266,8 +266,8 @@ const AuthItem: React.FC<{
 
 const ProItem: React.FC<{
   session: Session | null;
-  sub: () => any;
-  manage: () => any;
+  sub: () => void;
+  manage: () => void;
 }> = ({ sub, manage, session }) => {
   const [t] = useTranslation("drawer");
   const text = session?.user?.subscriptionId
@@ -290,13 +290,13 @@ const ProItem: React.FC<{
       text={text}
       onClick={async () => {
         if (!session?.user) {
-          void (await signIn());
+           return await signIn();
         }
 
         if (session?.user.subscriptionId) {
-          void manage();
+           return manage();
         } else {
-          void sub();
+          return sub();
         }
       }}
     />
