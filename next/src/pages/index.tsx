@@ -20,7 +20,7 @@ import type { AgentPlaybackControl, Message } from "../types/agentTypes";
 import { AGENT_PLAY, isTask } from "../types/agentTypes";
 import { useAgent } from "../hooks/useAgent";
 import { isEmptyOrBlank } from "../utils/whitespace";
-import { resetAllMessageSlices, useAgentStore, useMessageStore } from "../stores";
+import { resetAllMessageSlices, useAgentStore, useMessageStore } from "../components/stores";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useSettings } from "../hooks/useSettings";
 import { findLanguage, languages } from "../utils/languages";
@@ -160,6 +160,11 @@ const Home: NextPage = () => {
   const handleStopAgent = () => {
     agent?.stopAgent();
     updateIsAgentStopped();
+  };
+
+  const handleVisibleWindowClick = (visibleWindow: "Chat" | "Tasks") => {
+    // This controls whether the ChatWindow or TaskWindow is visible on mobile
+    setMobileVisibleWindow(visibleWindow);
   };
 
   const handleVisibleWindowClick = (visibleWindow: "Chat" | "Tasks") => {
