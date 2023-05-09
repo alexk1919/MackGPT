@@ -17,7 +17,7 @@ jobs:
         working-directory: platform
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v4
       - run: |
           pip install -U pip
           pip install poetry
@@ -34,7 +34,7 @@ jobs:
         working-directory: platform
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v4
       - run: |
           pip install -U pip
           pip install poetry
@@ -51,7 +51,7 @@ jobs:
         working-directory: platform
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v4
       - run: |
           pip install -U pip
           pip install poetry
@@ -83,7 +83,7 @@ jobs:
           - 3306:3306
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v4
       - run: |
           pip install -U pip
           pip install poetry
