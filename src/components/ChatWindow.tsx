@@ -151,13 +151,13 @@ const ChatWindow = ({
             <PopIn delay={1.5}>
               <div className="m-2 flex flex-col justify-between gap-2 sm:m-4 sm:flex-row">
                 <ExampleAgentButton
-                  name="PlatformerGPT 🎮"
+                  name="PythonGPT 🎮"
                   setAgentRun={setAgentRun}
                 >
-                  Write some code to make a platformer game.
+                  Write Python code to make a FastAPI based CRM app with authentication. Use OOP, DRY, and KISS software engineering principles.
                 </ExampleAgentButton>
                 <ExampleAgentButton
-                  name="TravelGPT 🌴"
+                  name="HawaiiGPT 🌴"
                   setAgentRun={setAgentRun}
                 >
                   Plan a detailed 7 day trip to Honolulu, Hawaii for a family of 5.
@@ -166,7 +166,7 @@ const ChatWindow = ({
                   name="ResearchGPT 📜"
                   setAgentRun={setAgentRun}
                 >
-                  Create a comprehensive report of the Nike company
+                  Create a comprehensive report on OpenAI and their history as a company. Include the technology they have developed, including ChatGPT.
                 </ExampleAgentButton>
               </div>
             </PopIn>
