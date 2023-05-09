@@ -160,7 +160,7 @@ const ChatWindow = ({
                   name="TravelGPT 🌴"
                   setAgentRun={setAgentRun}
                 >
-                  Plan a detailed trip to Honolulu, Hawaii for a family of 5.
+                  Plan a detailed 7 day trip to Honolulu, Hawaii for a family of 5.
                 </ExampleAgentButton>
                 <ExampleAgentButton
                   name="ResearchGPT 📜"
