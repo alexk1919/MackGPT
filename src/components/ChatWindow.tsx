@@ -160,7 +160,7 @@ const ChatWindow = ({
                   name="HawaiiGPT 🌴"
                   setAgentRun={setAgentRun}
                 >
-                  Plan a detailed 7 day trip to Honolulu, Hawaii for a family of 5.
+                  Plan a detailed 7 day trip to Honolulu, Hawaii for a family of 5. Total budget is $20,000 including flights, hotel, activities and food.
                 </ExampleAgentButton>
                 <ExampleAgentButton
                   name="ResearchGPT 📜"
