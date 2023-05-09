@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "next-i18next";
-import { FaClipboard, FaImage, FaSave, FaPlay, FaPause } from "react-icons/fa";
+import { FaClipboard, FaImage, FaPause, FaPlay, FaSave } from "react-icons/fa";
 import PopIn from "./motions/popin";
 import Expand from "./motions/expand";
 import * as htmlToImage from "html-to-image";
@@ -11,17 +11,17 @@ import FadeIn from "./motions/FadeIn";
 import Menu from "./Menu";
 import type { Message } from "../types/agentTypes";
 import {
-  isAction,
-  getTaskStatus,
-  MESSAGE_TYPE_GOAL,
-  MESSAGE_TYPE_THINKING,
-  MESSAGE_TYPE_SYSTEM,
-  TASK_STATUS_STARTED,
-  TASK_STATUS_EXECUTING,
-  TASK_STATUS_COMPLETED,
-  TASK_STATUS_FINAL,
   AUTOMATIC_MODE,
+  getTaskStatus,
+  isAction,
+  MESSAGE_TYPE_GOAL,
+  MESSAGE_TYPE_SYSTEM,
+  MESSAGE_TYPE_THINKING,
   PAUSE_MODE,
+  TASK_STATUS_COMPLETED,
+  TASK_STATUS_EXECUTING,
+  TASK_STATUS_FINAL,
+  TASK_STATUS_STARTED,
 } from "../types/agentTypes";
 import clsx from "clsx";
 import { getMessageContainerStyle, getTaskStatusIcon } from "./utils/helpers";
@@ -121,8 +121,7 @@ const ChatWindow = ({
       <div
         className={clsx(
           "mb-2 mr-2 ",
-          (fullscreen && "max-h-[75vh] flex-grow overflow-auto") ||
-          "window-heights"
+          (fullscreen && "max-h-[75vh] flex-grow overflow-auto") || "window-heights"
         )}
         ref={scrollRef}
         onScroll={handleScroll}
@@ -153,8 +152,7 @@ const ChatWindow = ({
               <ChatMessage
                 message={{
                   type: MESSAGE_TYPE_SYSTEM,
-                  value:
-                    "👉 " + t("CREATE_AN_AGENT_DESCRIPTION", { ns: "chat" }),
+                  value: "👉 " + t("CREATE_AN_AGENT_DESCRIPTION", { ns: "chat" }),
                 }}
               />
             </PopIn>
@@ -205,13 +203,7 @@ const ChatWindow = ({
   );
 };
 
-const SwitchContainer = ({
-  label,
-  children,
-}: {
-  label: string;
-  children: React.ReactNode;
-}) => {
+const SwitchContainer = ({ label, children }: { label: string; children: React.ReactNode }) => {
   return (
     <div className="m-1 flex w-36 items-center justify-center gap-2 rounded-lg border-[2px] border-white/20 bg-zinc-700 px-2 py-1">
       <p className="font-mono text-sm">{label}</p>
@@ -386,7 +378,6 @@ const MacWindowHeader = (props: HeaderProps) => {
       <Menu
         icon={<CgExport />}
         name={`${t("EXPORT", { ns: "common" })}`}
-        onChange={() => null}
         items={exportOptions}
         styleClass={{
           container: "relative",
@@ -409,12 +400,8 @@ const ChatMessage = ({ message }: { message: Message }) => {
       {message.type != MESSAGE_TYPE_SYSTEM && (
         // Avoid for system messages as they do not have an icon and will cause a weird space
         <>
-          <div className="mr-2 inline-block h-[0.9em]">
-            {getTaskStatusIcon(message, {})}
-          </div>
-          <span className="mr-2 font-bold">
-            {t(getMessagePrefix(message), { ns: "chat" })}
-          </span>
+          <div className="mr-2 inline-block h-[0.9em]">{getTaskStatusIcon(message, {})}</div>
+          <span className="mr-2 font-bold">{t(getMessagePrefix(message), { ns: "chat" })}</span>
         </>
       )}
 
