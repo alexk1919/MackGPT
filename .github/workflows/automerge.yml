@@ -19,6 +19,8 @@ jobs:
           token: ${{ secrets.PAT }}
           pull-request-number: ${{ github.event.pull_request.number }}
           merge-method: merge
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
 
       - name: Close Pull Request
         if: steps.automerge.outputs.merged == 'true'
@@ -28,4 +30,6 @@ jobs:
           pull-request-number: ${{ github.event.pull_request.number }}
           comment: Auto-closing pull request
           delete-branch: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
 
