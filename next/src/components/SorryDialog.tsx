@@ -21,14 +21,14 @@ export const SorryDialog = ({ show, close }: SorryDialogProps) => {
         {`${t("PLEASE_MONITOR", "PLEASE_MONITOR", {
           ns: "sorryDialog",
         })}`}
-        <a
+        {/* <a
           className="link"
           href="https://reworkd.github.io/AgentGPT-Documentation/docs/roadmap"
           target="_blank"
           rel="noreferrer"
         >
           {`${t("ROADMAP", { ns: "sorryDialog" })}`}
-        </a>
+        </a> */}
         {`${t("PLEASE_MONITOR_END_TEXT", "PLEASE_MONITOR_END_TEXT", {
           ns: "sorryDialog",
         })}`}

@@ -8,7 +8,7 @@
 	"ENSURE_YOU_HAVE_FREE_CREDITS": "確認您的帳戶上有可用的免費額度，否則您必須",
 	"GET_YOUR_OWN_APIKEY": "獲得您自己的 OpenAI API 金鑰",
 	"HERE": "這裡",
-	"HERE_YOU_CAN_ADD_YOUR_OPENAI_API_KEY": "您可以在這裡輸入OpenAI API金鑰。儘管這會使用您自己的OpenAI付費功能，但將會為您增加使用AgentGPT的權限！並且，您還可以選擇OpenAI提供的任一模型。",
+	"HERE_YOU_CAN_ADD_YOUR_OPENAI_API_KEY": "您可以在這裡輸入OpenAI API金鑰。儘管這會使用您自己的OpenAI付費功能，但將會為您增加使用MackGPT的權限！並且，您還可以選擇OpenAI提供的任一模型。",
 	"HIGHER_VALUES_MAKE_OUTPUT_MORE_RANDOM": "較高的值會增加輸出的隨機性，較低的值會增加的輸出的單一及集中性。",
 	"INFO_TO_USE_GPT4": "如果需要使用GPT-4模型，您還須提供GPT-4的API金鑰。您可以在此處申請",
 	"INVALID_OPENAI_API_KEY": "無效的 OpenAI API 金鑰！",
