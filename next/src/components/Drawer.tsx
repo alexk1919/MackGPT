@@ -55,8 +55,22 @@ const Drawer = ({
     };
   }, []);
 
+  const sub = api.account.subscribe.useMutation({
+    onSuccess: async (url) => {
+      if (!url) return;
+      await router.push(url);
+    },
+  });
+
   const query = api.agent.getAll.useQuery(undefined, {
     enabled: !!session?.user,
+  });
+
+  const manage = api.account.manage.useMutation({
+    onSuccess: async (url) => {
+      if (!url) return;
+      await router.push(url);
+    },
   });
 
   const toggleDrawer = () => {
@@ -225,7 +239,7 @@ const DrawerItem = (props: DrawerItemProps) => {
       className={clsx(
         "group flex cursor-pointer flex-row items-center rounded-md p-2 hover:bg-white/5",
         border && "border-[1px] border-white/20",
-        `${className || ""}`
+        className
       )}
       onClick={onClick}
     >
@@ -248,6 +262,45 @@ const AuthItem: React.FC<{
     : t("SIGN_IN");
 
   return <DrawerItem icon={icon} text={text} onClick={onClick} />;
+};
+
+const ProItem: React.FC<{
+  session: Session | null;
+  sub: () => any;
+  manage: () => any;
+}> = ({ sub, manage, session }) => {
+  const [t] = useTranslation("drawer");
+  const text = session?.user?.subscriptionId
+    ? t("ACCOUNT")
+    : t("GO_PRO");
+  let icon = session?.user ? <FaUser /> : <FaRocket />;
+  if (session?.user?.image) {
+    icon = (
+      <img
+        src={session?.user.image}
+        className="h-6 w-6 rounded-full"
+        alt="User Image"
+      />
+    );
+  }
+
+  return (
+    <DrawerItem
+      icon={icon}
+      text={text}
+      onClick={async () => {
+        if (!session?.user) {
+          void (await signIn());
+        }
+
+        if (session?.user.subscriptionId) {
+          void manage();
+        } else {
+          void sub();
+        }
+      }}
+    />
+  );
 };
 
 export default Drawer;
