@@ -9,10 +9,8 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./next/.env:/next/.env
-      - ./next/:/next/
-      - /next/node_modules
-      - /next/.next
+      - ./next/.env.docker:/app/.env
+      - ./db:/app/db
 
   platform:
     container_name: platform
