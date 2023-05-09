@@ -23,7 +23,7 @@
     "@radix-ui/react-tooltip": "^1.0.5",
     "@react-pdf/renderer": "^3.1.9",
     "@sentry/nextjs": "^7.49.0",
-    "@tanstack/react-query": "^4.20.0",
+    "@tanstack/react-query": "^4.29.5",
     "@trpc/client": "^10.25.0",
     "@trpc/next": "^10.21.1",
     "@trpc/react-query": "^10.21.1",
