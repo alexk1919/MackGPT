@@ -458,13 +458,13 @@ const FAQ = () => {
   return (
     <p>
       <br />
-      If you are facing issues, please head over to our{" "}
+      {/* If you are facing issues, please head over to our{" "}
       <a
         href="https://reworkd.github.io/AgentGPT-Documentation/docs/faq"
         className="text-sky-500"
       >
         FAQ
-      </a>
+      </a> */}
     </p>
   );
 };
