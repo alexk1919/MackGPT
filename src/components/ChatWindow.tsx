@@ -44,7 +44,6 @@ interface ChatWindowProps extends HeaderProps {
 
 const messageListId = "chat-window-message-list";
 
-const [initialLoad, setInitialLoad] = useState(true);
 
 const ChatWindow = ({
   messages,
@@ -76,6 +75,8 @@ const ChatWindow = ({
     const hasUserScrolled = scrollTop < scrollHeight - clientHeight - 10;
     setHasUserScrolled(hasUserScrolled);
   };
+
+  const [initialLoad, setInitialLoad] = useState(true);
 
   useEffect(() => {
     if (scrollRef && scrollRef.current) {
