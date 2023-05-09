@@ -20,8 +20,8 @@ jobs:
           token: ${{ secrets.PR_TOKEN }}
           branch: ${{ github.ref }}
           base: main
-          commit-message: 'Automated pull request from ${{ github.ref }} on ${{ format(github.event.head_commit.timestamp) }}'
-          title: New pull request from ${{ github.ref }} on ${{ format(github.event.head_commit.timestamp, 'DD/MM/YY HH:mm:ss') }}
+          commit-message: 'Automated PR from ${{ github.ref }} on ${{ format(github.event.head_commit.timestamp) }}'
+          title: New PR from ${{ github.ref }} on ${{ format(github.event.head_commit.timestamp, 'DD/MM/YY HH:mm:ss') }}
           body: Please review the changes made from ${{ github.ref }} on ${{ format(github.event.head_commit.timestamp, 'DD/MM/YY HH:mm:ss') }}
           draft: false
           # if: github.event.pull_request.head.ref != 'main'
