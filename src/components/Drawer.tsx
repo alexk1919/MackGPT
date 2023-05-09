@@ -24,13 +24,7 @@ import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
 import FadingHr from "./FadingHr";
 
-const Drawer = ({
-  showHelp,
-  showSettings,
-}: {
-  showHelp: () => void;
-  showSettings: () => void;
-}) => {
+const Drawer = ({ showHelp, showSettings }: { showHelp: () => void; showSettings: () => void }) => {
   const [t] = useTranslation();
   const [showDrawer, setShowDrawer] = useState(true);
   const { session, signIn, signOut, status } = useAuth();
@@ -104,9 +98,7 @@ const Drawer = ({
             <p className="font-bold">{`${t("MY_AGENTS", { ns: "drawer" })}`}</p>
             <button
               className={clsx(
-                showDrawer
-                  ? "-translate-x-2"
-                  : "translate-x-12 border-2 border-white/20",
+                showDrawer ? "-translate-x-2" : "translate-x-12 border-2 border-white/20",
                 "absolute right-0 top-2 z-40 rounded-md bg-zinc-900 p-2 text-white transition-all hover:bg-zinc-700 "
               )}
               onClick={toggleDrawer}
@@ -115,17 +107,15 @@ const Drawer = ({
             </button>
           </div>
           <ul className="flex flex-col gap-2 overflow-auto">
-            {userAgents.map(
-              (agent: any | undefined, index: any | undefined) => (
-                <DrawerItem
-                  key={index}
-                  icon={<FaRobot />}
-                  text={agent.name}
-                  className="w-full"
-                  onClick={() => void router.push(`/agent?id=${agent.id}`)}
-                />
-              )
-            )}
+            {userAgents.map((agent: any | undefined, index: any | undefined) => (
+              <DrawerItem
+                key={index}
+                icon={<FaRobot />}
+                text={agent.name}
+                className="w-full"
+                onClick={() => void router.push(`/agent?id=${agent.id}`)}
+              />
+            ))}
 
             {status === "unauthenticated" && (
               <div>
@@ -154,11 +144,7 @@ const Drawer = ({
           <FadingHr className="my-2" />
           {env.NEXT_PUBLIC_FF_SUB_ENABLED ||
             (router.query.pro && (
-              <ProItem
-                sub={sub.mutate}
-                manage={manage.mutate}
-                session={session}
-              />
+              <ProItem sub={sub.mutate} manage={manage.mutate} session={session} />
             ))}
           <AuthItem session={session} signIn={signIn} signOut={signOut} />
           <DrawerItem
@@ -172,9 +158,7 @@ const Drawer = ({
             onClick={handleSupport}
           />
           <DrawerItem
-            icon={
-              <FaCog className="transition-transform group-hover:rotate-90" />
-            }
+            icon={<FaCog className="transition-transform group-hover:rotate-90" />}
             text={`${t("SETTINGS_BUTTON", {
               ns: "drawer",
             })}`}
@@ -226,10 +210,7 @@ const Drawer = ({
 };
 
 interface DrawerItemProps
-  extends Pick<
-    React.AnchorHTMLAttributes<HTMLAnchorElement>,
-    "href" | "target"
-  > {
+  extends Pick<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href" | "target"> {
   icon: React.ReactNode;
   text: string;
   border?: boolean;
@@ -300,13 +281,7 @@ const ProItem: React.FC<{
     : `${t("GO_PRO", { ns: "drawer" })}`;
   let icon = session?.user ? <FaUser /> : <FaRocket />;
   if (session?.user?.image) {
-    icon = (
-      <img
-        src={session?.user.image}
-        className="h-6 w-6 rounded-full"
-        alt="User Image"
-      />
-    );
+    icon = <img src={session?.user.image} className="h-6 w-6 rounded-full" alt="User Image" />;
   }
 
   return (
