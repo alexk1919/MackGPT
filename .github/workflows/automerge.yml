@@ -24,7 +24,7 @@ jobs:
 
       - name: Close Pull Request
         if: steps.automerge.outputs.merged == 'true'
-        uses: peter-evans/close-pull@v2
+        uses: peter-evans/close-pull@v3
         with:
           token: ${{ secrets.PAT }}
           pull-request-number: ${{ github.event.pull_request.number }}
