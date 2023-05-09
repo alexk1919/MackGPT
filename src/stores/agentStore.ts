@@ -1,11 +1,18 @@
 import { createSelectors } from "./helpers";
 import type { StateCreator } from "zustand";
 import { create } from "zustand";
+<<<<<<< HEAD
 import { createJSONStorage, persist } from "zustand/middleware";
 import type AutonomousAgent from "../components/AutonomousAgent";
 import type { AgentMode, AgentPlaybackControl } from "../types/agentTypes";
 import { AGENT_PAUSE, AUTOMATIC_MODE } from "../types/agentTypes";
 import { env } from "../env/client.mjs";
+=======
+import { persist, createJSONStorage } from "zustand/middleware";
+import type AutonomousAgent from "../components/AutonomousAgent";
+import { AGENT_PAUSE, AUTOMATIC_MODE } from "../types/agentTypes";
+import type { AgentPlaybackControl, AgentMode } from "../types/agentTypes";
+>>>>>>> 62d1d68 (:bug: fix import errors)
 
 const resetters: (() => void)[] = [];
 
