@@ -66,7 +66,7 @@ More Coming soon...
 - ✅ **Framework**: [Nextjs 13 + Typescript](https://nextjs.org/).
 - ✅ **Auth**: [Next-Auth.js](https://next-auth.js.org)
 - ✅ **ORM**: [Prisma](https://prisma.io).
-- ✅ **Database**: [Supabase](https://supabase.com/).
+- ✅ **Database**: [Planetscale](https://planetscale.com/).
 - ✅ **Styling**: [TailwindCSS + HeadlessUI](https://tailwindcss.com).
 - ✅ **Typescript Schema Validation**: [Zod](https://github.com/colinhacks/zod).
 - ✅ **End-to-end typesafe API**: [tRPC](https://trpc.io/).
