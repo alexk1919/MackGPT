@@ -8,14 +8,26 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'AgentGPT',
   tagline: 'Autonomous AI agents directly in your browser',
-  favicon: 'favicon.ico',
-  url: 'https://docs.reworkd.ai',
-  baseUrl: '/',
+  favicon: 'img/favicon.ico',
+
+  // Set the production url of your site here
+  url: 'https://your-docusaurus-test-site.com',
+  // Set the /<baseUrl>/ pathname under which your site is served
+  // For GitHub pages deployment, it is often '/<projectName>/'
+  baseUrl: '/AgentGPT-Documentation/',
+
+  // GitHub pages deployment config.
+  // If you aren't using GitHub pages, you don't need these.
   organizationName: 'reworkd', // Usually your GitHub org/user name.
-  projectName: 'AgentGPT', // Usually your repo name.
+  projectName: 'AgentGPT-Documentation', // Usually your repo name.
   trailingSlash: false,
+
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
+
+  // Even if you don't use internalization, you can use this field to set useful
+  // metadata like html lang. For example, if your site is Chinese, you may want
+  // to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
@@ -23,15 +35,23 @@ const config = {
 
   presets: [
     [
-      '@docusaurus/preset-classic',
+      'classic',
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          routeBasePath: '/',
-          editUrl: 'https://github.com/reworkd/AgentGPT/tree/main/docs/',
+          // Please change this to your repo.
+          // Remove this to remove the "edit this page" links.
+          // editUrl:
+          //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
-        blog: false,
+        // blog: {
+        //   showReadingTime: true,
+        //   // Please change this to your repo.
+        //   // Remove this to remove the "edit this page" links.
+        //   editUrl:
+        //     'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+        // },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -68,21 +88,7 @@ const config = {
       },
       colorMode: {
         defaultMode: 'dark',
-        respectPrefersColorScheme: true,
-      },
-      algolia: {
-        appId: '0G401MURU8',
-        apiKey: '9155bc53c9ece019df8734db3c893206', // public API key
-        indexName: 'reworkd',
-        contextualSearch: true,
-        searchParameters: {},
-        searchPagePath: 'false',
-
-        // Optional: Replace parts of the item URLs from Algolia. Useful when using the same search index for multiple deployments using a different baseUrl. You can use regexp or string in the `from` param. For example: localhost:3000 vs myCompany.com/docs
-        replaceSearchResultPathname: {
-          from: '/docs/', // or as RegExp: /\/docs\//
-          to: '/',
-        },
+        respectPrefersColorScheme: false,
       },
     }),
 };
