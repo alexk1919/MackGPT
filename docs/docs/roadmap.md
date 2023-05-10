@@ -46,4 +46,4 @@ If any of these features stand out to you or you'd like to suggest more features
 
 ## Notes
 We are constantly updating our roadmap and adding new features so stay tuned for more updates and have a look at our GitHub.
-We are however a small team and would love community support in helping develop AgentGPT. If you're interested, please head over to our [contributing page](/docs/contributing).
+We are however a small team and would love community support in helping develop AgentGPT. If you're interested, please head over to our [contributing page](/contributing).
