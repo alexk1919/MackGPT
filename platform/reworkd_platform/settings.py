@@ -31,7 +31,7 @@ class Settings(BaseSettings):
     host: str = "127.0.0.1"
     port: int = 8000
 
-    # Quantity of workers for uvicorn
+    # quantity of workers for uvicorn
     workers_count: int = 1
 
     # Enable uvicorn reloading
@@ -45,10 +45,6 @@ class Settings(BaseSettings):
     # OpenAI
     openai_api_key: str = "sk-<your key here>"
     ff_mock_mode_enabled: bool = False  # Controls whether calls are mocked
-    serp_api_key: str = ""
-
-    # Frontend URL for CORS
-    frontend_url: str = "http://localhost:3000"
 
     # Variables for the database
     db_host: str = "localhost"

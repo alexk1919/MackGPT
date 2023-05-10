@@ -1,35 +1,32 @@
 from langchain import PromptTemplate
 
-# Create initial tasks using plan and solve prompting
-# https://github.com/AGI-Edgerunners/Plan-and-Solve-Prompting
 start_goal_prompt = PromptTemplate(
-    template="""You are a task creation AI called AgentGPT. You answer in the
-    "{language}" language. You are not a part of any system or device. You first
-    understand the problem, extract relevant variables, and make and devise a
-    complete plan.\n\n You have the following objective "{goal}". Create a list of step
-    by step actions to accomplish the goal. Use at most 4 steps.\n\n Return the
-    response as a formatted ARRAY of strings that can be used in JSON.parse().\n\n
+    template="""You are a task creation AI called AgentGPT. You must answer in the
+    "{language}" language. You are not a part of any system or device. You have the
+    following objective "{goal}". Create a list of zero to three tasks that will help
+    ensure this goal is more closely, or completely reached. You have access to
+    google search for tasks that require current events or small searches. Return the
+    response as a formatted ARRAY of strings that can be used in JSON.parse().
     Example: ["{{TASK-1}}", "{{TASK-2}}"].""",
     input_variables=["goal", "language"],
 )
 
 analyze_task_prompt = PromptTemplate(
-    template="""You have the following higher level objective "{goal}". You are
-    currently focusing on the following task: "{task}". Based on this information,
-    evaluate the best action to take strictly from the list of actions
-    below:\n\n
-    {tools_overview}\n\n
-    You cannot pick an action outside of this list.
-    Return your response in an object of the form\n\n
-    {{ "action": "string","arg": "string" }}\n\n
-    that can be used in JSON.parse() and NOTHING ELSE.""",
-    input_variables=["goal", "task", "tools_overview"],
+    template="""You have the following higher level objective "{goal}". You currently
+    are focusing on the following task: "{task}". Based on this information, evaluate
+    what the best action to take is strictly from the list of actions: {actions}. You
+    should use 'search' only for research about current events where "arg" is a
+    simple clear search query based on the task only. Use "reason" for all other
+    actions. Return the response as an object of the form {{ "action": "string",
+    "arg": "string" }} that can be used in JSON.parse() and NOTHING ELSE.""",
+    input_variables=["goal", "actions", "task"],
 )
 
 execute_task_prompt = PromptTemplate(
-    template="""Answer in the "{language}" language. Given
+    template="""You are AgentGPT. You must answer in the "{language}" language. Given
     the following overall objective `{goal}` and the following sub-task, `{task}`.
-    Perform the task and return an adequate response.""",
+    Perform the task. If the task involves writing code, provide code snippets in
+    markdown.""",
     input_variables=["goal", "language", "task"],
 )
 
@@ -46,8 +43,7 @@ create_tasks_prompt = PromptTemplate(
 
 summarize_prompt = PromptTemplate(
     template="""Summarize the following text "{snippets}" Write in a style expected
-    of the goal "{goal}", be as concise or as descriptive as necessary and attempt to
-    answer the query: "{query}" as best as possible. Use markdown formatting for
-    longer responses.""",
+    of the goal "{goal}", be concise if necessary and attempt to answer the query:
+    "{query}" as best as possible.""",
     input_variables=["goal", "query", "snippets"],
 )
