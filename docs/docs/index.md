@@ -23,4 +23,4 @@ This is why we are proudly open source. We'd love to hear your feedback at every
 ## What's next?
 The entire AgentGPT team is incredibly excited for the road to follow.
 We have a ton of exciting features planned for the future, and we hope you'll join us on this journey.
-Have a glimpse of what's to come in the [roadmap](/docs/roadmap) on the next page.
+Have a glimpse of what's to come in the [roadmap](/roadmap) on the next page.

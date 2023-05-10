@@ -50,12 +50,12 @@ Using AgentGPT is free as we handle the API costs. If you provide your own API k
 <details>
 <summary>AgentGPT said it made a file / database / script, where can I find it?</summary>
 Currently AgentGPT is incapable of outputs in that manner, but this is something we are actively working on.
-Keep an eye on our <a href="/docs/roadmap">roadmap</a> to get an idea for when this might be available.
+Keep an eye on our <a href="/roadmap">roadmap</a> to get an idea for when this might be available.
 </details>
 
 <details>
 <summary>Did AgentGPT actually email 100 people?</summary>
-No! We don't currently support this functionality, but its something we're looking to implement. View our <a href="/docs/roadmap">roadmap</a> to get an idea for when this might be available.
+No! We don't currently support this functionality, but its something we're looking to implement. View our <a href="/roadmap">roadmap</a> to get an idea for when this might be available.
 When this does work, we'll be sure to validate that an action like "sending an email" is actually something you want to do 🙂
 </details>
 
@@ -69,7 +69,7 @@ If you provide your own API key you can increase the number of loops your Agent 
 <summary>My Agent was doing great but then it got stopped! Can I start from where I left off?</summary>
 Currently all Agent runs are isolated from each other so this is not possible.
 This is something we want to add in the future, but in the meantime you can create another AgentGPT run using the information it generated for you from the previous run.
-Keep an eye on our <a href="/docs/roadmap">roadmap</a> to get an idea for when this might be available.
+Keep an eye on our <a href="/roadmap">roadmap</a> to get an idea for when this might be available.
 </details>
 
 <details>
@@ -102,12 +102,12 @@ Both AgentGPT and AutoGPT are projects involving autonomous AI agents. AutoGPT i
 
 <details>
 <summary>What can AgentGPT do?</summary>
-AgentGPT can do a lot, but we're also working on giving it a lot more capabilities. Visit our <a href="/docs/usecases">usecases</a> page to learn about how people currently use AgentGPT.
+AgentGPT can do a lot, but we're also working on giving it a lot more capabilities. Visit our <a href="/usecases">usecases</a> page to learn about how people currently use AgentGPT.
 </details>
 
 <details>
 <summary>Does AgentGPT have access to the internet?</summary>
-Not yet but this is coming very soon! Keep an eye on our <a href="/docs/roadmap">roadmap</a>.
+Not yet but this is coming very soon! Keep an eye on our <a href="/roadmap">roadmap</a>.
 </details>
 
 
@@ -115,7 +115,7 @@ Not yet but this is coming very soon! Keep an eye on our <a href="/docs/roadmap"
 
 <details>
 <summary>I'm having trouble setting up AgentGPT locally!</summary>
-Please visit our <a href="/docs/setup">setup</a> guide to diagnose any issues. If you have a problem that is undocumented, please submit an <a href="https://github.com/reworkd/AgentGPT/issues">issue on GitHub</a>.
+Please visit our <a href="/setup">setup</a> guide to diagnose any issues. If you have a problem that is undocumented, please submit an <a href="https://github.com/reworkd/AgentGPT/issues">issue on GitHub</a>.
 </details>
 
 
