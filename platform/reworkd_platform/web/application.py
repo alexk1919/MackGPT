@@ -54,7 +54,7 @@ def get_app() -> FastAPI:
     )
 
     origins = [
-        settings.frontend_url,
+        settings.reworkd_platform_frontend_url,
     ]
 
     app.add_middleware(
