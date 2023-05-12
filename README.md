@@ -47,7 +47,7 @@ It will attempt to reach the goal by thinking of tasks to do, executing them, an
 
 
 ## 🎉 Roadmap
-This platform is currently in beta, a full list of completed and planed features can be found on our [public roadmap](https://docs.reworkd.ai/roadmap). 
+This platform is currently in beta, a full list of completed and planed features can be found on our [public roadmap](https://docs.reworkd.ai/roadmap).
 
 ## 🚀 Tech Stack
 
