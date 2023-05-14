@@ -1,13 +1,12 @@
 import axios from "axios";
-import type {ModelSettings} from "../utils/types";
-import type {Analysis} from "../services/agent-service";
-import AgentService from "../services/agent-service";
-import {DEFAULT_MAX_LOOPS_CUSTOM_API_KEY, DEFAULT_MAX_LOOPS_FREE,} from "../utils/constants";
-import type {Session} from "next-auth";
-import {env} from "../env/client.mjs";
-import {v1, v4} from "uuid";
-import type {RequestBody} from "../utils/interfaces";
-import type {AgentMode, AgentPlaybackControl, Message, Task,} from "../types/agentTypes";
+import type { ModelSettings } from "../utils/types";
+import type { Analysis } from "../services/agent-service";
+import { DEFAULT_MAX_LOOPS_CUSTOM_API_KEY, DEFAULT_MAX_LOOPS_FREE } from "../utils/constants";
+import type { Session } from "next-auth";
+import { env } from "../env/client.mjs";
+import { v1, v4 } from "uuid";
+import type { RequestBody } from "../utils/interfaces";
+import type { AgentMode, AgentPlaybackControl, Message, Task } from "../types/agentTypes";
 import {
   AGENT_PAUSE,
   AGENT_PLAY,
@@ -22,8 +21,8 @@ import {
   TASK_STATUS_FINAL,
   TASK_STATUS_STARTED,
 } from "../types/agentTypes";
-import {useAgentStore, useMessageStore} from "./stores";
-import {i18n} from "next-i18next";
+import { useAgentStore, useMessageStore } from "../stores";
+import { translate } from "../utils/translations";
 
 const TIMEOUT_LONG = 1000;
 const TIMOUT_SHORT = 800;
@@ -210,13 +209,6 @@ class AutonomousAgent {
   }
 
   async getInitialTasks(): Promise<string[]> {
-    if (this.shouldRunClientSide()) {
-      if (!env.NEXT_PUBLIC_FF_MOCK_MODE_ENABLED) {
-        await testConnection(this.modelSettings);
-      }
-      return await AgentService.startGoalAgent(this.modelSettings, this.goal, this.language);
-    }
-
     const data = {
       modelSettings: this.modelSettings,
       goal: this.goal,
@@ -229,18 +221,6 @@ class AutonomousAgent {
 
   async getAdditionalTasks(currentTask: string, result: string): Promise<string[]> {
     const taskValues = this.getRemainingTasks().map((task) => task.value);
-
-    if (this.shouldRunClientSide()) {
-      return await AgentService.createTasksAgent(
-        this.modelSettings,
-        this.goal,
-        this.language,
-        taskValues,
-        currentTask,
-        result,
-        this.completedTasks
-      );
-    }
 
     const data = {
       modelSettings: this.modelSettings,
@@ -258,10 +238,6 @@ class AutonomousAgent {
   }
 
   async analyzeTask(task: string): Promise<Analysis> {
-    if (this.shouldRunClientSide()) {
-      return await AgentService.analyzeTaskAgent(this.modelSettings, this.goal, task);
-    }
-
     const data = {
       modelSettings: this.modelSettings,
       goal: this.goal,
@@ -274,17 +250,6 @@ class AutonomousAgent {
   }
 
   async executeTask(task: string, analysis: Analysis): Promise<string> {
-    // Run search server side since clients won't have a key
-    if (this.shouldRunClientSide() && analysis.action !== "search") {
-      return await AgentService.executeTaskAgent(
-        this.modelSettings,
-        this.goal,
-        this.language,
-        task,
-        analysis
-      );
-    }
-
     const data = {
       modelSettings: this.modelSettings,
       goal: this.goal,
@@ -309,10 +274,6 @@ class AutonomousAgent {
 
       throw e;
     }
-  }
-
-  private shouldRunClientSide() {
-    return !!this.modelSettings.customApiKey;
   }
 
   updatePlayBackControl(newPlaybackControl: AgentPlaybackControl) {
