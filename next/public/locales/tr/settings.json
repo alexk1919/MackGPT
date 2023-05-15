@@ -7,7 +7,7 @@
 	"CONTROL_THE_MAXIMUM_NUM_OF_LOOPS": "Aracının çalıştıracağı maksimum döngü sayısını kontrol eder (daha yüksek değer, daha fazla API çağrısı yapar).",
 	"GET_YOUR_OWN_APIKEY": "Kendi OpenAI API anahtarınızı alın",
 	"HERE": "Burada",
-	"HERE_YOU_CAN_ADD_YOUR_OPENAI_API_KEY": "Burada OpenAI API anahtarınızı ekleyebilirsiniz. \nBu, kendi OpenAI kullanımınız için ödeme yapmanızı gerektirir, ancak size AgentGPT'ye daha fazla erişim sağlar! \nEk olarak OpenAI'nin sunduğu herhangi bir modeli de seçebilirsiniz.",
+	"HERE_YOU_CAN_ADD_YOUR_OPENAI_API_KEY": "Burada OpenAI API anahtarınızı ekleyebilirsiniz. \nBu, kendi OpenAI kullanımınız için ödeme yapmanızı gerektirir, ancak size MackGPT'ye daha fazla erişim sağlar! \nEk olarak OpenAI'nin sunduğu herhangi bir modeli de seçebilirsiniz.",
 	"HIGHER_VALUES_MAKE_OUTPUT_MORE_RANDOM": "Daha yüksek değerler çıktıyı daha rasgele hale getirirken, daha düşük değerler çıktıyı daha odaklı ve deterministik yapar.",
 	"INFO_TO_USE_GPT4": "GPT-4 modelini kullanmak için GPT-4 için API anahtarını da sağlamanız gerekir. \nbunun için istekte bulunabilirsiniz",
 	"INVALID_OPENAI_API_KEY": "Geçersiz API anahtarı!",

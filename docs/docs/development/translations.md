@@ -81,7 +81,7 @@ as `README.zh-HANS.md`. If you'd like to translate the README to your language, 
 
 After doing this, add a link badge to our main english README alongside the other badges. Example:
 
-<a href="https://github.com/reworkd/AgentGPT/blob/master/README.md"><img src="https://img.shields.io/badge/lang-English-blue.svg" alt="English"/></a>
+<a href="https://github.com/reworkd/MackGPT/blob/master/README.md"><img src="https://img.shields.io/badge/lang-English-blue.svg" alt="English"/></a>
 
 ## Translating our Documentation
 
