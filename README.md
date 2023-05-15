@@ -12,7 +12,9 @@
 <p align="center">
 <a href="https://mackgpt.com">🔗 Short link</a>
 <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-<a href="#-getting-started">🤝 Contribute</a>
+<a href="https://docs.reworkd.ai/">📚 Docs</a>
+<span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+<a href="https://docs.reworkd.ai/contributing">🤝 Contribute</a>
 <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
 <a href="https://twitter.com/MackGPT_com">🐦 Twitter</a>
 </p>
@@ -64,7 +66,7 @@ More Coming soon...
 - ✅ **Framework**: [Nextjs 13 + Typescript](https://nextjs.org/).
 - ✅ **Auth**: [Next-Auth.js](https://next-auth.js.org)
 - ✅ **ORM**: [Prisma](https://prisma.io).
-- ✅ **Database**: [Supabase](https://supabase.com/).
+- ✅ **Database**: [Planetscale](https://planetscale.com/).
 - ✅ **Styling**: [TailwindCSS + HeadlessUI](https://tailwindcss.com).
 - ✅ **Typescript Schema Validation**: [Zod](https://github.com/colinhacks/zod).
 - ✅ **End-to-end typesafe API**: [tRPC](https://trpc.io/).
@@ -131,7 +133,6 @@ NODE_ENV=development
 NEXTAUTH_SECRET=changeme
 NEXTAUTH_URL=http://localhost:3000
 DATABASE_URL=file:./db.sqlite
-
 # Your open api key
 OPENAI_API_KEY=changeme
 ```
