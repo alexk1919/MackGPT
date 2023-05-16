@@ -1,7 +1,15 @@
 #!/bin/env sh
 
+cd /next
+dos2unix wait-for-db.sh
+
 # copy .env file if not exists
 [ ! -f .env ] && [ -f .env.example ] && cp .env.example .env
+cp .env .env.temp
+dos2unix .env.temp
+cat .env.temp > .env
+rm .env.temp
+
 source .env
 
 # Ensure DB is available before running Prisma commands
@@ -9,7 +17,7 @@ source .env
 
 # Run Prisma commands
 if [[ ! -f "/app/prisma/${DATABASE_URL:5}" ]]; then
-  npx prisma migrate dev --name init
+  npx prisma migrate deploy --name init
   npx prisma db push
 fi
 

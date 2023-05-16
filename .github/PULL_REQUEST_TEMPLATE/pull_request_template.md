@@ -55,5 +55,5 @@ By submitting this pull request, you must agree to follow our
 Put an x in the boxes to confirm you agree.
 -->
 
-- [ ] My contribution follow this project's [contributing guide](https://github.com/alexk1919/MackGPT/tree/main/.github/CONTRIBUTING.md)
-- [ ] I agree to follow this project's [Code of Conduct](https://github.com/alexk1919/MackGPT/tree/main/.github/CODE_OF_CONDUCT.md)
+- [ ] My contribution follow this project's [contributing guide](https://github.com/reworkd/AgentGPT/tree/main/.github/CONTRIBUTING.md)
+- [ ] I agree to follow this project's [Code of Conduct](https://github.com/reworkd/AgentGPT/tree/main/.github/CODE_OF_CONDUCT.md)

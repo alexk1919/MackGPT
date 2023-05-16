@@ -1,11 +1,17 @@
 ---
-sidebar_position: 3
+sidebar_position: 4
 ---
+
 # ❓ Frequently Asked Questions
+
 ### Introduction
-Below is a list of the most frequently asked questions about AgentGPT. If you have any unanswered questions, please reach out to the moderation or dev team on [Discord](https://discord.gg/jdSBAnmdnY) or [GitHub](https://github.com/reworkd/AgentGPT).
+
+Below is a list of the most frequently asked questions about AgentGPT. If you have any unanswered questions, please
+reach out to the moderation or dev team on [Discord](https://discord.gg/jdSBAnmdnY)
+or [GitHub](https://github.com/reworkd/AgentGPT).
 
 ### API key issues
+
 <details>
 <summary>Where can I get an API key?</summary>
 You should first sign up for an OpenAI account. You can do so <a href="https://openai.com/blog/openai-api">here</a>.
@@ -18,14 +24,12 @@ All you need to do now is visit the <a href="https://platform.openai.com/account
 
 <details>
 <summary>I have free API credits, why is my API key not working?</summary>
-OpenAI API accounts start with $18 of free tier credits.
-Look at your <a href="https://platform.openai.com/account/usage">OpenAI API usage page</a> to see if it has been used up or expired.
-Expired credit will show up as red such as the below image
-
-![Example banner](./assets/expired-free-tier.png)
-
-If you have used up your free tier credits, you will need to add billing information into your API key: <a href="https://platform.openai.com/account/billing/overview">OpenAI API Overview</a>.
-Note that a few runs of AgentGPT will only cost a few cents.
+OpenAI API accounts start with $18 of free tier credits. Unfortunately, an individual server can only run the free tier API a few times a second before being stopped. Our server has to run all of the API calls from hundreds of users itself so unfortunately this won't work.
+<br/>
+<br/>
+Paid APIs do not face this issue. Because of this, you will need to add billing information into your API
+key: <a href="https://platform.openai.com/account/billing/overview">OpenAI API Overview</a>.
+<br/><strong>Note:</strong> that a few runs of AgentGPT will only cost a few cents.
 </details>
 
 <details>
@@ -90,9 +94,13 @@ If you provide your own API key, you can increase the output length within the a
 </details>
 
 ### Misc
+
 <details>
 <summary>What is the difference between this and ChatGPT?</summary>
-ChatGPT is a great tool that will allow you to ask a specific question and receive a result. AgentGPT on the otherhand is a platform for AI agents. You configure an agent to accomplish a broad goal, and it will automatically think and perform tasks to achieve it.
+ChatGPT is a great tool that will allow you to ask a specific question and receive a result. It also follows a conversation, so after you have received a response, you can continue talking to it and it will remember (within limits) what was descussed previously.
+
+AgentGPT on the otherhand is a platform for AI agents. You configure an agent to accomplish a broad goal, and it will
+automatically think and perform tasks to achieve it.
 </details>
 
 <details>
@@ -110,12 +118,11 @@ AgentGPT can do a lot, but we're also working on giving it a lot more capabiliti
 Not yet but this is coming very soon! Keep an eye on our <a href="/roadmap">roadmap</a>.
 </details>
 
-
 ### Local contribution issues
 
 <details>
 <summary>I'm having trouble setting up AgentGPT locally!</summary>
-Please visit our <a href="/setup">setup</a> guide to diagnose any issues. If you have a problem that is undocumented, please submit an <a href="https://github.com/reworkd/AgentGPT/issues">issue on GitHub</a>.
+Please visit our <a href="/development/setup">setup</a> guide to diagnose any issues. If you have a problem that is undocumented, please submit an <a href="https://github.com/reworkd/AgentGPT/issues">issue on GitHub</a>.
 </details>
 
 

@@ -1,5 +1,7 @@
 from langchain import PromptTemplate
 
+# Create initial tasks using plan and solve prompting
+# https://github.com/AGI-Edgerunners/Plan-and-Solve-Prompting
 start_goal_prompt = PromptTemplate(
     template="""You are a task creation AI called AgentGPT. You answer in the
     "{language}" language. You are not a part of any system or device. You first
@@ -12,21 +14,22 @@ start_goal_prompt = PromptTemplate(
 )
 
 analyze_task_prompt = PromptTemplate(
-    template="""You have the following higher level objective "{goal}". You currently
-    are focusing on the following task: "{task}". Based on this information, evaluate
-    what the best action to take is strictly from the list of actions: {actions}. You
-    should use 'search' only for research about current events where "arg" is a
-    simple clear search query based on the task only. Use "reason" for all other
-    actions. Return the response as an object of the form {{ "action": "string",
-    "arg": "string" }} that can be used in JSON.parse() and NOTHING ELSE.""",
-    input_variables=["goal", "actions", "task"],
+    template="""You have the following higher level objective "{goal}". You are
+    currently focusing on the following task: "{task}". Based on this information,
+    evaluate the best action to take strictly from the list of actions
+    below:\n\n
+    {tools_overview}\n\n
+    You cannot pick an action outside of this list.
+    Return your response in an object of the form\n\n
+    {{ "action": "string","arg": "string" }}\n\n
+    that can be used in JSON.parse() and NOTHING ELSE.""",
+    input_variables=["goal", "task", "tools_overview"],
 )
 
 execute_task_prompt = PromptTemplate(
-    template="""You are AgentGPT. You must answer in the "{language}" language. Given
+    template="""Answer in the "{language}" language. Given
     the following overall objective `{goal}` and the following sub-task, `{task}`.
-    Perform the task. If the task involves writing code, provide code snippets in
-    markdown.""",
+    Perform the task and return an adequate response.""",
     input_variables=["goal", "language", "task"],
 )
 
@@ -43,7 +46,8 @@ create_tasks_prompt = PromptTemplate(
 
 summarize_prompt = PromptTemplate(
     template="""Summarize the following text "{snippets}" Write in a style expected
-    of the goal "{goal}", be concise if necessary and attempt to answer the query:
-    "{query}" as best as possible.""",
+    of the goal "{goal}", be as concise or as descriptive as necessary and attempt to
+    answer the query: "{query}" as best as possible. Use markdown formatting for
+    longer responses.""",
     input_variables=["goal", "query", "snippets"],
 )

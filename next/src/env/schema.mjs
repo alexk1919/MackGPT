@@ -5,6 +5,7 @@ const requiredForProduction = () =>
   process.env.NODE_ENV === "production"
     ? z.string().min(1).trim()
     : z.string().min(1).trim().optional();
+
 function stringToBoolean() {
   return z.preprocess((str) => str === "true", z.boolean());
 }
@@ -29,7 +30,6 @@ export const serverSchema = z.object({
     process.env.VERCEL ? z.string() : z.string().url()
   ),
   OPENAI_API_KEY: z.string(),
-
   GOOGLE_CLIENT_ID: z.string().min(1).trim().optional(),
   GOOGLE_CLIENT_SECRET: z.string().min(1).trim().optional(),
   GITHUB_CLIENT_ID: z.string().min(1).trim().optional(),
@@ -70,16 +70,11 @@ export const serverEnv = {
  */
 export const clientSchema = z.object({
   NEXT_PUBLIC_VERCEL_ENV: z.enum(["production", "preview", "development"]),
-  NEXT_PUBLIC_STRIPE_DONATION_ENABLED: z
-    .string()
-    .transform((str) => str === "true")
-    .optional(),
   NEXT_PUBLIC_WEB_SEARCH_ENABLED: stringToBoolean(),
   NEXT_PUBLIC_FORCE_AUTH: stringToBoolean(),
-  NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string().optional(),
-  NEXT_PUBLIC_FF_SUB_ENABLED: stringToBoolean(),
   NEXT_PUBLIC_FF_MOCK_MODE_ENABLED: stringToBoolean(),
-  NEXT_PUBLIC_VERCEL_URL: z.string().optional()
+  NEXT_PUBLIC_VERCEL_URL: z.string().optional(),
+  NEXT_PUBLIC_BACKEND_URL: z.string().url()
 });
 
 /**
@@ -90,8 +85,6 @@ export const clientSchema = z.object({
  */
 export const clientEnv = {
   NEXT_PUBLIC_VERCEL_ENV: process.env.NEXT_PUBLIC_VERCEL_ENV ?? "development",
-  NEXT_PUBLIC_STRIPE_DONATION_ENABLED:
-  process.env.NEXT_PUBLIC_STRIPE_DONATION_ENABLED,
   NEXT_PUBLIC_WEB_SEARCH_ENABLED: process.env.NEXT_PUBLIC_WEB_SEARCH_ENABLED,
   NEXT_PUBLIC_FORCE_AUTH: process.env.NEXT_PUBLIC_FORCE_AUTH,
   NEXT_PUBLIC_VERCEL_URL: process.env.NEXT_PUBLIC_VERCEL_URL ?? "http://localhost:3000",

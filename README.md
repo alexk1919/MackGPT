@@ -1,18 +1,22 @@
 <p align="center">
-  <img src="https://mackgpt.com/banner.png"/>
+  <img src="https://raw.githubusercontent.com/reworkd/AgentGPT/main/next/public/banner.png" height="300"/>
 </p>
 <p align="center">
   <em>🤖 Create, customize, and launch autonomous AI Agents in your browser. 🤖 </em>
 </p>
 <p align="center">
-    <img alt="Node version" src="https://img.shields.io/static/v1?label=node&message=%20%3E=16.0.0&logo=node.js&color=2334D058" />
-      <a href="https://github.com/alexk1919/MackGPT/blob/main/README.md"><img src="https://img.shields.io/badge/lang-English-blue.svg" alt="English"></a>
+    <img alt="Node version" src="https://img.shields.io/static/v1?label=node&message=%20%3E=18&logo=node.js&color=2334D058" />
+      <a href="https://github.com/reworkd/AgentGPT/blob/master/README.md"><img src="https://img.shields.io/badge/lang-English-blue.svg" alt="English"></a>
+  <a href="https://github.com/reworkd/AgentGPT/blob/master/docs/README.zh-HANS.md"><img src="https://img.shields.io/badge/lang-简体中文-red.svg" alt="简体中文"></a>
+  <a href="https://github.com/reworkd/AgentGPT/blob/master/docs/README.hu-Cs4K1Sr4C.md"><img src="https://img.shields.io/badge/lang-Hungarian-red.svg" alt="Hungarian"></a>
 </p>
 
 <p align="center">
 <a href="https://mackgpt.com">🔗 Short link</a>
 <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
 <a href="https://docs.reworkd.ai/">📚 Docs</a>
+<span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+<a href="https://docs.reworkd.ai/contributing">🤝 Contribute</a>
 <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
 <a href="https://docs.reworkd.ai/contributing">🤝 Contribute</a>
 <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
@@ -54,18 +58,7 @@ It will attempt to reach the goal by thinking of tasks to do, executing them, an
 
 
 ## 🎉 Roadmap
-
-This platform is currently in beta, we are currently working on:
-
-- Long term memory via a vector DB 🧠
-- Web browsing capabilities via LangChain 🌐
-- Interaction with websites and people 👨‍👩‍👦
-- Writing capabilities via a document API 📄
-- Saving agent runs 💾
-- Users and authentication 🔐
-- Stripe integration for a lower limit paid version (So we can stop worrying about infra costs) 💵
-
-More Coming soon...
+This platform is currently in beta, a full list of completed and planed features can be found on our [public roadmap](https://docs.reworkd.ai/roadmap).
 
 ## 🚀 Tech Stack
 
@@ -79,6 +72,7 @@ More Coming soon...
 - ✅ **End-to-end typesafe API**: [tRPC](https://trpc.io/).
 
 ## 👨‍🚀 Getting Started
+✨ For the latest guide, visit our [Setup documentation](https://docs.reworkd.ai/development/setup)
 
 ### 🐳 Docker Setup
 
@@ -109,7 +103,6 @@ use the provided setup script.
 ### 🛠️ Manual Setup
 
 > 🚧 You will need [Nodejs +18 (LTS recommended)](https://nodejs.org/en/) installed.
-
 1. Fork this project:
 
 - [Click here](https://github.com/alexk1919/MackGPT/fork).
@@ -123,22 +116,21 @@ git clone git@github.com:YOU_USER/MackGPT.git
 3. Install dependencies:
 
 ```bash
-cd MackGPT
+cd AgentGPT/next
 npm install
 ```
 
 4. Create a **.env** file with the following content:
 
-> 🚧 The environment variables must match the following [schema](https://github.com/alexk1919/MackGPT/blob/main/src/env/schema.mjs).
-
+> 🚧 The environment variables must match the following [schema](https://github.com/reworkd/AgentGPT/blob/main/src/env/schema.mjs).
 ```bash
 # Deployment Environment:
 NODE_ENV=development
-
 # Next Auth config:
 # Generate a secret with `openssl rand -base64 32`
 NEXTAUTH_SECRET=changeme
 NEXTAUTH_URL=http://localhost:3000
+NEXT_PUBLIC_BACKEND_URL=http://localhost:3000
 DATABASE_URL=file:./db.sqlite
 # Your open api key
 OPENAI_API_KEY=changeme

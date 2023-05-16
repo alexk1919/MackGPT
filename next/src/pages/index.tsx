@@ -162,12 +162,6 @@ const Home: NextPage = () => {
     updateIsAgentStopped();
   };
 
-  const proTitle = (
-    <>
-      MackGPT<span className="ml-1 text-amber-500/90">Pro</span>
-    </>
-  );
-
   const handleVisibleWindowClick = (visibleWindow: "Chat" | "Tasks") => {
     // This controls whether the ChatWindow or TaskWindow is visible on mobile
     setMobileVisibleWindow(visibleWindow);

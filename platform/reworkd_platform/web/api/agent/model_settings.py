@@ -1,8 +1,11 @@
+from random import randint
 from typing import Optional
 
 import openai
 from langchain.chat_models import ChatOpenAI
 from pydantic import BaseModel
+
+from reworkd_platform.settings import settings
 
 
 class ModelSettings(BaseModel):

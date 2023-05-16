@@ -1,14 +1,8 @@
 import axios from "axios";
 import type { ModelSettings } from "../utils/types";
 import type { Analysis } from "../services/agent-service";
-import AgentService from "../services/agent-service";
-import {
-  DEFAULT_MAX_LOOPS_CUSTOM_API_KEY,
-  DEFAULT_MAX_LOOPS_FREE,
-  DEFAULT_MAX_LOOPS_PAID,
-} from "../utils/constants";
+import { DEFAULT_MAX_LOOPS_CUSTOM_API_KEY, DEFAULT_MAX_LOOPS_FREE } from "../utils/constants";
 import type { Session } from "next-auth";
-import { env } from "../env/client.mjs";
 import { v1, v4 } from "uuid";
 import type { RequestBody } from "../utils/interfaces";
 import type { AgentMode, AgentPlaybackControl, Message, Task } from "../types/agentTypes";
@@ -208,105 +202,59 @@ class AutonomousAgent {
   }
 
   private maxLoops() {
-    const defaultLoops = !!this.session?.user.subscriptionId
-      ? DEFAULT_MAX_LOOPS_PAID
-      : DEFAULT_MAX_LOOPS_FREE;
-
     return !!this.modelSettings.customApiKey
       ? this.modelSettings.customMaxLoops || DEFAULT_MAX_LOOPS_CUSTOM_API_KEY
-      : defaultLoops;
+      : DEFAULT_MAX_LOOPS_FREE;
   }
 
   async getInitialTasks(): Promise<string[]> {
-    if (this.shouldRunClientSide()) {
-      if (!env.NEXT_PUBLIC_FF_MOCK_MODE_ENABLED) {
-        await testConnection(this.modelSettings);
-      }
-      return await AgentService.startGoalAgent(this.modelSettings, this.goal, this.language);
-    }
-
-    const data = {
-      modelSettings: this.modelSettings,
-      goal: this.goal,
-      language: this.language,
-    };
-    const res = await this.post(`/api/agent/start`, data);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-argument
-    return res.data.newTasks as string[];
+    return (
+      await this.post<{ newTasks: string[] }>("/api/agent/start", {
+        modelSettings: this.modelSettings,
+        goal: this.goal,
+        language: this.language,
+      })
+    ).newTasks;
   }
 
   async getAdditionalTasks(currentTask: string, result: string): Promise<string[]> {
-    const taskValues = this.getRemainingTasks().map((task) => task.value);
-
-    if (this.shouldRunClientSide()) {
-      return await AgentService.createTasksAgent(
-        this.modelSettings,
-        this.goal,
-        this.language,
-        taskValues,
-        currentTask,
-        result,
-        this.completedTasks
-      );
-    }
-
-    const data = {
-      modelSettings: this.modelSettings,
-      goal: this.goal,
-      language: this.language,
-      tasks: taskValues,
-      lastTask: currentTask,
-      result: result,
-      completedTasks: this.completedTasks,
-    };
-    const res = await this.post(`/api/agent/create`, data);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument,@typescript-eslint/no-unsafe-member-access
-    return res.data.newTasks as string[];
+    return (
+      await this.post<{ newTasks: string[] }>("/api/agent/create", {
+        modelSettings: this.modelSettings,
+        goal: this.goal,
+        language: this.language,
+        lastTask: currentTask,
+        tasks: this.getRemainingTasks().map((task) => task.value),
+        result: result,
+        completedTasks: this.completedTasks,
+      })
+    ).newTasks;
   }
 
   async analyzeTask(task: string): Promise<Analysis> {
-    if (this.shouldRunClientSide()) {
-      return await AgentService.analyzeTaskAgent(this.modelSettings, this.goal, task);
-    }
-
-    const data = {
+    return await this.post<Analysis>("api/agent/analyze", {
       modelSettings: this.modelSettings,
       goal: this.goal,
       language: this.language,
       task: task,
-    };
-    const res = await this.post("/api/agent/analyze", data);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-argument
-    return res.data.response as Analysis;
+    });
   }
 
   async executeTask(task: string, analysis: Analysis): Promise<string> {
-    // Run search server side since clients won't have a key
-    if (this.shouldRunClientSide() && analysis.action !== "search") {
-      return await AgentService.executeTaskAgent(
-        this.modelSettings,
-        this.goal,
-        this.language,
-        task,
-        analysis
-      );
-    }
-
-    const data = {
-      modelSettings: this.modelSettings,
-      goal: this.goal,
-      language: this.language,
-      task: task,
-      analysis: analysis,
-    };
-    const res = await this.post("/api/agent/execute", data);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-argument
-    return res.data.response as string;
+    return (
+      await this.post<{ response: string }>("/api/agent/execute", {
+        modelSettings: this.modelSettings,
+        goal: this.goal,
+        language: this.language,
+        task: task,
+        analysis: analysis,
+      })
+    ).response;
   }
 
-  private async post(url: string, data: RequestBody) {
+  private async post<T>(url: string, data: RequestBody) {
     try {
-      return await axios.post(url, data);
+      return (await axios.post(url, data)).data as T;
     } catch (e) {
       this.shutdown();
 
@@ -316,10 +264,6 @@ class AutonomousAgent {
 
       throw e;
     }
-  }
-
-  private shouldRunClientSide() {
-    return !!this.modelSettings.customApiKey;
   }
 
   updatePlayBackControl(newPlaybackControl: AgentPlaybackControl) {
@@ -373,9 +317,15 @@ class AutonomousAgent {
 
   sendAnalysisMessage(analysis: Analysis) {
     // Hack to send message with generic test. Should use a different type in the future
-    let message = "🧠 Generating response...";
+    let message = "⏰ Generating response...";
     if (analysis.action == "search") {
-      message = `🌐 Searching the web for "${analysis.arg}"...`;
+      message = `🔍 Searching the web for "${analysis.arg}"...`;
+    }
+    if (analysis.action == "wikipedia") {
+      message = `🌐 Searching Wikipedia for "${analysis.arg}"...`;
+    }
+    if (analysis.action == "image") {
+      message = `🎨 Generating an image with prompt: "${analysis.arg}"...`;
     }
 
     this.sendMessage({

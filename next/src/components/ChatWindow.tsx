@@ -278,7 +278,9 @@ const MacWindowHeader = (props: HeaderProps) => {
         link.download = "MackGPT-Agent.png";
         link.click();
       })
-      .catch(console.error);
+      .catch(() =>
+        alert("Error saving image! Note this doesn't work if the AI generated an image")
+      );
   };
 
   const copyElementText = (elementId: string) => {
@@ -459,11 +461,8 @@ const FAQ = () => {
   return (
     <p>
       <br />
-      {/* If you are facing issues, please head over to our{" "}
-      <a
-        href="https://reworkd.github.io/AgentGPT-Documentation/docs/faq"
-        className="text-sky-500"
-      >
+      If you are facing issues, please head over to our{" "}
+      <a href="https://docs.reworkd.ai/faq" className="text-sky-500">
         FAQ
       </a> */}
     </p>
