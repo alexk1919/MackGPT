@@ -43,8 +43,13 @@ class Settings(BaseSettings):
     log_level: LogLevel = LogLevel.INFO
 
     # OpenAI
-    openai_api_key: str = "sk-<your key here>"
+    openai_api_base: str = "https://api.openai.com/v1"
+    openai_api_key: str = "<Should be updated via env>"
     ff_mock_mode_enabled: bool = False  # Controls whether calls are mocked
+    serp_api_key: str = "<Should be updated via env>"
+    helicone_api_key: str = "<Should be updated via env>"
+    # Frontend URL for CORS
+    frontend_url: str = "http://localhost:3000"
 
     # Variables for the database
     db_host: str = "localhost"

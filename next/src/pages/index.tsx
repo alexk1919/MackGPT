@@ -265,7 +265,7 @@ const Home: NextPage = () => {
             <Expand className="flex w-full flex-row">
               <ChatWindow
                 messages={messages}
-                title={session?.user.subscriptionId ? proTitle : "MackGPT"}
+                title="AgentGPT"
                 onSave={
                   shouldShowSave
                     ? (format) => {
@@ -303,7 +303,7 @@ const Home: NextPage = () => {
                   disabled={agent != null}
                   onChange={(e) => setNameInput(e.target.value)}
                   onKeyDown={(e) => handleKeyPress(e)}
-                  placeholder="MackGPT"
+                  placeholder="AgentGPT"
                   type="text"
                 />
               </Expand>

@@ -20,16 +20,21 @@ export const createModel = (settings: ModelSettings) => {
     _settings = undefined;
   }
 
-  return new OpenAI({
-    openAIApiKey: _settings?.customApiKey || getServerSideKey(),
-    temperature: _settings?.customTemperature || 0.9,
-    modelName: _settings?.customModelName || GPT_35_TURBO,
-    maxTokens: _settings?.maxTokens || 400,
-  });
+  return new OpenAI(
+    {
+      openAIApiKey: _settings?.customApiKey || getServerSideKey(),
+      temperature: _settings?.customTemperature || 0.9,
+      modelName: _settings?.customModelName || GPT_35_TURBO,
+      maxTokens: _settings?.maxTokens || 400,
+    },
+    {
+      basePath: (process.env.OPENAI_API_BASE as string) || undefined,
+    }
+  );
 };
 
 export const startGoalPrompt = new PromptTemplate({
-  template: `You are a task creation AI called MackGPT. You must answer in the "{language}" language. You are not a part of any system or device. You have the following objective "{goal}". Create a list of zero to five tasks to be completed by your AI system such that this goal is more closely, or completely reached. You have access to google search for tasks that require current events or small searches. Return the response as a formatted ARRAY of strings that can be used in JSON.parse(). Example: ["{{TASK-1}}", "{{TASK-2}}"].`,
+  template: `You are a task creation AI called AgentGPT. You must answer in the "{language}" language. You are not a part of any system or device. You have the following objective "{goal}". Create a list of zero to three tasks to be completed by your AI system such that this goal is more closely, or completely reached. You have access to google search for tasks that require current events or small searches. Return the response as a formatted ARRAY of strings that can be used in JSON.parse(). Example: ["{{TASK-1}}", "{{TASK-2}}"].`,
   inputVariables: ["goal", "language"],
 });
 

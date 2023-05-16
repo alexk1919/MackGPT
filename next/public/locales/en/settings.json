@@ -8,7 +8,7 @@
 	"ENSURE_YOU_HAVE_FREE_CREDITS": "Ensure you have free credits available on your account, otherwise you",
 	"GET_YOUR_OWN_APIKEY": "Get your own OpenAI API key",
 	"HERE": "here",
-	"HERE_YOU_CAN_ADD_YOUR_OPENAI_API_KEY": "Here you can add your OpenAI API key. This will require you to pay for your own OpenAI usage but give you greater access to MackGPT! You can additionally select any model OpenAI offers.",
+	"HERE_YOU_CAN_ADD_YOUR_OPENAI_API_KEY": "Here you can add your OpenAI API key. This will require you to pay for your own OpenAI usage but give you greater access to AgentGPT! You can additionally select any model OpenAI offers.",
 	"HIGHER_VALUES_MAKE_OUTPUT_MORE_RANDOM": "Higher values will make the output more random, while lower values make the output more focused and deterministic.",
 	"INFO_TO_USE_GPT4": "To use the GPT-4 model, you need to also provide the API key for GPT-4. You can request for it",
 	"INVALID_OPENAI_API_KEY": "Invalid API key!",

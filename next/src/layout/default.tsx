@@ -22,7 +22,7 @@ const DefaultLayout = (props: LayoutProps) => {
       )}
     >
       <Head>
-        <title>MackGPT - Autonomous AI Agents in your browser</title>
+        <title>AgentGPT</title>
         <meta name="description" content={description} />
         <meta name="twitter:site" content="@MackGPT_com" />
         <meta name="twitter:card" content="summary_large_image" />

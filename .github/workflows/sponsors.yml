@@ -24,6 +24,6 @@ jobs:
           branch: "workflow/sponsors"
           title: "🤖 Update Sponsors"
           commit-message: "🤖 Update Sponsors"
-          body: "🤖 Automated pull request created by [sponsors action](https://github.com/alexk1919/MackGPT/actions/workflows/sponsors.yml)"
+          body: "🤖 Automated pull request created by [sponsors action](https://github.com/reworkd/AgentGPT/actions/workflows/sponsors.yml)"
           labels: "documentation"
 

@@ -27,8 +27,8 @@ Changes visible to users:
 - [ ] **New feature** (prefix: `feat` - non-breaking change which adds functionality)
 - [ ] **Breaking change** (prefix: `feat!!` or `fix!!` - fix or feature that would cause existing functionality to not work as expected)
 - [ ] **Documentation** (prefix: `docs` - improvements to any documentation content **for users**)
-- [ ] **Homepage** (prefix: `page` - improvements to the [Homepage](https://mackgpt.com/) #{HOMEPAGE} should lead to the place where one could actually change the homepage
-- [ ] **Contributing Guidelines** (prefix: `contrib` - any improvements to documentation content **for contributors** - see [Contributing](https://github.com/alexk1919/MackGPT/tree/main/.github/CONTRIBUTING.md)
+- [ ] **Homepage** (prefix: `page` - improvements to the [Homepage](https://agentgpt.reworkd.ai/) #{HOMEPAGE} should lead to the place where one could actually change the homepage
+- [ ] **Contributing Guidelines** (prefix: `contrib` - any improvements to documentation content **for contributors** - see [Contributing](https://github.com/reworkd/AgentGPT/tree/main/.github/CONTRIBUTING.md)
 
 Internal changes:
 
@@ -50,8 +50,8 @@ Internal changes:
 
 <!--
 By submitting this pull request, you must agree to follow our
-[contributing guide](https://github.com/alexk1919/MackGPT/tree/main/.github/CONTRIBUTING.md) and
-[Code of Conduct](https://github.com/alexk1919/MackGPT/tree/main/.github/CODE_OF_CONDUCT.md).
+[contributing guide](https://github.com/reworkd/AgentGPT/tree/main/.github/CONTRIBUTING.md) and
+[Code of Conduct](https://github.com/reworkd/AgentGPT/tree/main/.github/CODE_OF_CONDUCT.md).
 Put an x in the boxes to confirm you agree.
 -->
 

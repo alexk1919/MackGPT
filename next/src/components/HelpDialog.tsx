@@ -9,7 +9,7 @@ export default function HelpDialog({ show, close }: { show: boolean; close: () =
     <Dialog header={`${t("WELCOME_TO_AGENT_GPT", { ns: "help" })} 🤖`} isShown={show} close={close}>
       <div>
         <p>
-          <strong>MackGPT</strong> {t("INTRODUCING_AGENTGPT", { ns: "help" })}
+          <strong>AgentGPT</strong> {t("INTRODUCING_AGENTGPT", { ns: "help" })}
         </p>
         {/* <div>
           {t("TO_LEARN_MORE_ABOUT_AGENTGPT", {
