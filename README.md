@@ -18,7 +18,7 @@
 <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
 <a href="https://docs.reworkd.ai/contributing">🤝 Contribute</a>
 <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-<a href="https://docs.reworkd.ai/contributing">🤝 Contribute</a>
+<a href="https://twitter.com/reworkdai">🐦 Twitter</a>
 <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
 <a href="https://twitter.com/MackGPT_com">🐦 Twitter</a>
 </p>
