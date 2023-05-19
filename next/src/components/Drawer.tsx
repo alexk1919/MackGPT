@@ -133,19 +133,7 @@ const Drawer = ({ showHelp, showSettings }: { showHelp: () => void; showSettings
                 />
               }
               text="Twitter"
-              href="https://twitter.com/mackgpt_com"
-              target="_blank"
-              small
-            />
-            <DrawerItem
-              icon={
-                <FaTiktok
-                  size={30}
-                  className="transition-colors group-hover:fill-current group-hover:text-sky-500"
-                />
-              }
-              text="TikTok"
-              href="https://www.tiktok.com/@mackgpt"
+              href="https://twitter.com/reworkdai"
               target="_blank"
               small
             />
