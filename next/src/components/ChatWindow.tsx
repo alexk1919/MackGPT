@@ -241,7 +241,7 @@ const ExampleAgentButton = ({
       onClick={handleClick}
     >
       <p className="text-lg font-black">{name}</p>
-      {children}
+      <p className="mt-2 text-sm">{children}</p>
     </div>
   );
 };
