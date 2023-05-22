@@ -12,10 +12,10 @@
 <p align="center">
 <a href="https://mackgpt.com">🔗 Short link</a>
 <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-<a href="https://docs.reworkd.ai/">📚 Docs</a>
+<!-- <a href="https://docs.reworkd.ai/">📚 Docs</a>
 <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
 <a href="https://docs.reworkd.ai/contributing">🤝 Contribute</a>
-<span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+<span>&nbsp;&nbsp;•&nbsp;&nbsp;</span> -->
 <a href="https://twitter.com/MackGPT_com">🐦 Twitter</a>
 </p>
 
