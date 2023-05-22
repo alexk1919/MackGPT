@@ -52,3 +52,5 @@ yarn-error.log*
 .sentryclirc
 /volumes/
 schema.prismae
+
+/z-unused
