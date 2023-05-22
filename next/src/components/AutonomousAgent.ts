@@ -1,16 +1,9 @@
 import axios from "axios";
 import type { ModelSettings } from "../utils/types";
 import type { Analysis } from "../services/agent-service";
-import AgentService from "../services/agent-service";
-import {
-  DEFAULT_MAX_LOOPS_CUSTOM_API_KEY,
-  DEFAULT_MAX_LOOPS_FREE,
-  DEFAULT_MAX_LOOPS_PAID,
-} from "../utils/constants";
+import { DEFAULT_MAX_LOOPS_CUSTOM_API_KEY, DEFAULT_MAX_LOOPS_FREE } from "../utils/constants";
 import type { Session } from "next-auth";
-import { env } from "../env/client.mjs";
 import { v1, v4 } from "uuid";
-import type { RequestBody } from "../utils/interfaces";
 import type { AgentMode, AgentPlaybackControl, Message, Task } from "../types/agentTypes";
 import {
   AGENT_PAUSE,
@@ -28,6 +21,7 @@ import {
 } from "../types/agentTypes";
 import { useAgentStore, useMessageStore } from "../stores";
 import { translate } from "../utils/translations";
+import { AgentApi } from "../services/agent-api";
 
 const TIMEOUT_LONG = 1000;
 const TIMOUT_SHORT = 800;
@@ -47,6 +41,7 @@ class AutonomousAgent {
   _id: string;
   mode: AgentMode;
   playbackControl: AgentPlaybackControl;
+  $api: AgentApi;
 
   constructor(
     name: string,
@@ -71,6 +66,15 @@ class AutonomousAgent {
     this._id = v4();
     this.mode = mode || AUTOMATIC_MODE;
     this.playbackControl = playbackControl || this.mode == PAUSE_MODE ? AGENT_PAUSE : AGENT_PLAY;
+
+    this.$api = new AgentApi(
+      {
+        goal,
+        language,
+        modelSettings,
+      },
+      this.onApiError
+    );
   }
 
   async run() {
@@ -91,7 +95,7 @@ class AutonomousAgent {
 
     // Initialize by getting taskValues
     try {
-      const taskValues = await this.getInitialTasks();
+      const taskValues = await this.$api.getInitialTasks();
       for (const value of taskValues) {
         await new Promise((r) => setTimeout(r, TIMOUT_SHORT));
         const task: Task = {
@@ -141,16 +145,20 @@ class AutonomousAgent {
     this.sendThinkingMessage();
 
     // Default to reasoning
-    let analysis: Analysis = { action: "reason", arg: "" };
+    let analysis: Analysis = {
+      reasoning: "I'll just think about it...",
+      action: "reason",
+      arg: "",
+    };
 
     // If enabled, analyze what tool to use
     if (useAgentStore.getState().isWebSearchEnabled) {
       // Analyze how to execute a task: Reason, web search, other tools...
-      analysis = await this.analyzeTask(currentTask.value);
+      analysis = await this.$api.analyzeTask(currentTask.value);
       this.sendAnalysisMessage(analysis);
     }
 
-    const result = await this.executeTask(currentTask.value, analysis);
+    const result = await this.$api.executeTask(currentTask.value, analysis);
     this.sendMessage({
       ...currentTask,
       info: result,
@@ -165,7 +173,14 @@ class AutonomousAgent {
 
     // Add new tasks
     try {
-      const newTasks = await this.getAdditionalTasks(currentTask.value, result);
+      const newTasks = await this.$api.getAdditionalTasks(
+        {
+          current: currentTask.value,
+          remaining: this.getRemainingTasks().map((task) => task.value),
+          completed: this.completedTasks,
+        },
+        result
+      );
       for (const value of newTasks) {
         await new Promise((r) => setTimeout(r, TIMOUT_SHORT));
         const task: Task = {
@@ -208,118 +223,9 @@ class AutonomousAgent {
   }
 
   private maxLoops() {
-    const defaultLoops = !!this.session?.user.subscriptionId
-      ? DEFAULT_MAX_LOOPS_PAID
-      : DEFAULT_MAX_LOOPS_FREE;
-
     return !!this.modelSettings.customApiKey
       ? this.modelSettings.customMaxLoops || DEFAULT_MAX_LOOPS_CUSTOM_API_KEY
-      : defaultLoops;
-  }
-
-  async getInitialTasks(): Promise<string[]> {
-    if (this.shouldRunClientSide()) {
-      if (!env.NEXT_PUBLIC_FF_MOCK_MODE_ENABLED) {
-        await testConnection(this.modelSettings);
-      }
-      return await AgentService.startGoalAgent(this.modelSettings, this.goal, this.language);
-    }
-
-    const data = {
-      modelSettings: this.modelSettings,
-      goal: this.goal,
-      language: this.language,
-    };
-    const res = await this.post(`/api/agent/start`, data);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-argument
-    return res.data.newTasks as string[];
-  }
-
-  async getAdditionalTasks(currentTask: string, result: string): Promise<string[]> {
-    const taskValues = this.getRemainingTasks().map((task) => task.value);
-
-    if (this.shouldRunClientSide()) {
-      return await AgentService.createTasksAgent(
-        this.modelSettings,
-        this.goal,
-        this.language,
-        taskValues,
-        currentTask,
-        result,
-        this.completedTasks
-      );
-    }
-
-    const data = {
-      modelSettings: this.modelSettings,
-      goal: this.goal,
-      language: this.language,
-      tasks: taskValues,
-      lastTask: currentTask,
-      result: result,
-      completedTasks: this.completedTasks,
-    };
-    const res = await this.post(`/api/agent/create`, data);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument,@typescript-eslint/no-unsafe-member-access
-    return res.data.newTasks as string[];
-  }
-
-  async analyzeTask(task: string): Promise<Analysis> {
-    if (this.shouldRunClientSide()) {
-      return await AgentService.analyzeTaskAgent(this.modelSettings, this.goal, task);
-    }
-
-    const data = {
-      modelSettings: this.modelSettings,
-      goal: this.goal,
-      language: this.language,
-      task: task,
-    };
-    const res = await this.post("/api/agent/analyze", data);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-argument
-    return res.data.response as Analysis;
-  }
-
-  async executeTask(task: string, analysis: Analysis): Promise<string> {
-    // Run search server side since clients won't have a key
-    if (this.shouldRunClientSide() && analysis.action !== "search") {
-      return await AgentService.executeTaskAgent(
-        this.modelSettings,
-        this.goal,
-        this.language,
-        task,
-        analysis
-      );
-    }
-
-    const data = {
-      modelSettings: this.modelSettings,
-      goal: this.goal,
-      language: this.language,
-      task: task,
-      analysis: analysis,
-    };
-    const res = await this.post("/api/agent/execute", data);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-argument
-    return res.data.response as string;
-  }
-
-  private async post(url: string, data: RequestBody) {
-    try {
-      return await axios.post(url, data);
-    } catch (e) {
-      this.shutdown();
-
-      if (axios.isAxiosError(e) && e.response?.status === 429) {
-        this.sendErrorMessage(translate("RATE_LIMIT_EXCEEDED", "errors"));
-      }
-
-      throw e;
-    }
-  }
-
-  private shouldRunClientSide() {
-    return !!this.modelSettings.customApiKey;
+      : DEFAULT_MAX_LOOPS_FREE;
   }
 
   updatePlayBackControl(newPlaybackControl: AgentPlaybackControl) {
@@ -373,9 +279,15 @@ class AutonomousAgent {
 
   sendAnalysisMessage(analysis: Analysis) {
     // Hack to send message with generic test. Should use a different type in the future
-    let message = "🧠 Generating response...";
+    let message = "⏰ Generating response...";
     if (analysis.action == "search") {
-      message = `🌐 Searching the web for "${analysis.arg}"...`;
+      message = `🔍 Searching the web for "${analysis.arg}"...`;
+    }
+    if (analysis.action == "wikipedia") {
+      message = `🌐 Searching Wikipedia for "${analysis.arg}"...`;
+    }
+    if (analysis.action == "image") {
+      message = `🎨 Generating an image with prompt: "${analysis.arg}"...`;
     }
 
     this.sendMessage({
@@ -391,27 +303,17 @@ class AutonomousAgent {
   sendErrorMessage(error: string) {
     this.sendMessage({ type: MESSAGE_TYPE_SYSTEM, value: error });
   }
-}
 
-const testConnection = async (modelSettings: ModelSettings) => {
-  // A dummy connection to see if the key is valid
-  // Can't use LangChain / OpenAI libraries to test because they have retries in place
-  return await axios.post(
-    "https://api.openai.com/v1/chat/completions",
-    {
-      model: modelSettings.customModelName,
-      messages: [{ role: "user", content: "Say this is a test" }],
-      max_tokens: 7,
-      temperature: 0,
-    },
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${modelSettings.customApiKey ?? ""}`,
-      },
+  private onApiError = (e: unknown) => {
+    this.shutdown();
+
+    if (axios.isAxiosError(e) && e.response?.status === 429) {
+      this.sendErrorMessage(translate("RATE_LIMIT_EXCEEDED", "errors"));
     }
-  );
-};
+
+    throw e;
+  };
+}
 
 const getMessageFromError = (e: unknown) => {
   let message = "ERROR_RETRIEVE_INITIAL_TASKS";

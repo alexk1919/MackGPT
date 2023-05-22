@@ -47,18 +47,7 @@ It will attempt to reach the goal by thinking of tasks to do, executing them, an
 
 
 ## 🎉 Roadmap
-
-This platform is currently in beta, we are currently working on:
-
-- Long term memory via a vector DB 🧠
-- Web browsing capabilities via LangChain 🌐
-- Interaction with websites and people 👨‍👩‍👦
-- Writing capabilities via a document API 📄
-- Saving agent runs 💾
-- Users and authentication 🔐
-- Stripe integration for a lower limit paid version (So we can stop worrying about infra costs) 💵
-
-More Coming soon...
+This platform is currently in beta, a full list of completed and planed features can be found on our [public roadmap](https://docs.reworkd.ai/roadmap).
 
 ## 🚀 Tech Stack
 
@@ -72,6 +61,7 @@ More Coming soon...
 - ✅ **End-to-end typesafe API**: [tRPC](https://trpc.io/).
 
 ## 👨‍🚀 Getting Started
+✨ For the latest guide, visit our [Setup documentation](https://docs.reworkd.ai/development/setup)
 
 ### 🐳 Docker Setup
 
@@ -102,7 +92,6 @@ use the provided setup script.
 ### 🛠️ Manual Setup
 
 > 🚧 You will need [Nodejs +18 (LTS recommended)](https://nodejs.org/en/) installed.
-
 1. Fork this project:
 
 - [Click here](https://github.com/alexk1919/MackGPT/fork).
@@ -116,7 +105,7 @@ git clone git@github.com:YOU_USER/MackGPT.git
 3. Install dependencies:
 
 ```bash
-cd MackGPT
+cd MackGPT/next
 npm install
 ```
 
@@ -127,11 +116,11 @@ npm install
 ```bash
 # Deployment Environment:
 NODE_ENV=development
-
 # Next Auth config:
 # Generate a secret with `openssl rand -base64 32`
 NEXTAUTH_SECRET=changeme
 NEXTAUTH_URL=http://localhost:3000
+NEXT_PUBLIC_BACKEND_URL=http://localhost:3000
 DATABASE_URL=file:./db.sqlite
 # Your open api key
 OPENAI_API_KEY=changeme

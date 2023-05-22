@@ -8,29 +8,19 @@ import {
   FaHeart,
   FaQuestionCircle,
   FaRobot,
-  FaRocket,
   FaSignInAlt,
   FaSignOutAlt,
   FaTiktok,
   FaTwitter,
-  FaUser,
 } from "react-icons/fa";
 import clsx from "clsx";
 import { useAuth } from "../hooks/useAuth";
 import type { Session } from "next-auth";
-import { env } from "../env/client.mjs";
 import { api } from "../utils/api";
 import { useRouter } from "next/router";
-import { signIn } from "next-auth/react";
 import FadingHr from "./FadingHr";
 
-const Drawer = ({
-  showHelp,
-  showSettings,
-}: {
-  showHelp: () => void;
-  showSettings: () => void;
-}) => {
+const Drawer = ({ showHelp, showSettings }: { showHelp: () => void; showSettings: () => void }) => {
   const [t] = useTranslation("drawer");
   const [showDrawer, setShowDrawer] = useState(true);
   const { session, signIn, signOut, status } = useAuth();
@@ -60,22 +50,8 @@ const Drawer = ({
     };
   }, []);
 
-  const sub = api.account.subscribe.useMutation({
-    onSuccess: async (url) => {
-      if (!url) return;
-      await router.push(url);
-    },
-  });
-
   const query = api.agent.getAll.useQuery(undefined, {
     enabled: !!session?.user,
-  });
-
-  const manage = api.account.manage.useMutation({
-    onSuccess: async (url) => {
-      if (!url) return;
-      await router.push(url);
-    },
   });
 
   const toggleDrawer = () => {
@@ -114,61 +90,41 @@ const Drawer = ({
           </div>
           <ul className="flex flex-col gap-2 overflow-auto">
             {userAgents.map((agent, index) => (
-                <DrawerItem
-                  key={index}
-                  icon={<FaRobot />}
-                  text={agent.name}
-                  className="w-full"
-                  onClick={() => void router.push(`/agent?id=${agent.id}`)}
-                />
-              )
-            )}
+              <DrawerItem
+                key={index}
+                icon={<FaRobot />}
+                text={agent.name}
+                className="w-full"
+                onClick={() => void router.push(`/agent?id=${agent.id}`)}
+              />
+            ))}
 
             {status === "unauthenticated" && (
-              <div>
-                <a
-                  className="link"
-                  onClick={() => void signIn()}
-                >
+              <div className="text-sm">
+                <a className="link" onClick={() => void signIn()}>
                   {t("SIGN_IN")}
                 </a>{" "}
                 {t("SIGN_IN_NOTICE")}
               </div>
             )}
             {status === "authenticated" && userAgents.length === 0 && (
-              <div>
-                {t("NEED_TO_SIGN_IN_AND_CREATE_AGENT_FIRST")}
-              </div>
+              <div className="text-sm">{t("NEED_TO_SIGN_IN_AND_CREATE_AGENT_FIRST")}</div>
             )}
           </ul>
         </div>
 
         <div className="flex flex-col gap-1">
           <FadingHr className="my-2" />
-          {env.NEXT_PUBLIC_FF_SUB_ENABLED ||
-            (router.query.pro && (
-              <ProItem sub={sub.mutate} manage={manage.mutate} session={session} />
-            ))}
           <AuthItem session={session} signIn={signIn} signOut={signOut} />
+          <DrawerItem icon={<FaQuestionCircle />} text={t("HELP_BUTTON")} onClick={showHelp} />
+          <DrawerItem icon={<FaHeart />} text={t("SUPPORT_BUTTON")} onClick={handleSupport} />
           <DrawerItem
-            icon={<FaQuestionCircle />}
-            text={t("HELP_BUTTON")}
-            onClick={showHelp}
-          />
-          <DrawerItem
-            icon={<FaHeart />}
-            text={t("SUPPORT_BUTTON")}
-            onClick={handleSupport}
-          />
-          <DrawerItem
-            icon={
-              <FaCog className="transition-transform group-hover:rotate-90" />
-            }
+            icon={<FaCog className="transition-transform group-hover:rotate-90" />}
             text={t("SETTINGS_BUTTON")}
             onClick={showSettings}
           />
           <FadingHr className="my-2" />
-          <div className="flex flex-row items-center">
+          <div className="flex flex-row items-center justify-center gap-2">
             <DrawerItem
               icon={
                 <FaTwitter
@@ -266,44 +222,9 @@ const AuthItem: React.FC<{
   const [t] = useTranslation("drawer");
   const icon = session?.user ? <FaSignOutAlt /> : <FaSignInAlt />;
   const onClick = session?.user ? signOut : signIn;
-  const text = session?.user
-    ? t("SIGN_OUT")
-    : t("SIGN_IN");
+  const text = session?.user ? t("SIGN_OUT") : t("SIGN_IN");
 
   return <DrawerItem icon={icon} text={text} onClick={onClick} />;
-};
-
-const ProItem: React.FC<{
-  session: Session | null;
-  sub: () => void;
-  manage: () => void;
-}> = ({ sub, manage, session }) => {
-  const [t] = useTranslation("drawer");
-  const text = session?.user?.subscriptionId
-    ? t("ACCOUNT")
-    : t("GO_PRO");
-  let icon = session?.user ? <FaUser /> : <FaRocket />;
-  if (session?.user?.image) {
-    icon = <img src={session?.user.image} className="h-6 w-6 rounded-full" alt="User Image" />;
-  }
-
-  return (
-    <DrawerItem
-      icon={icon}
-      text={text}
-      onClick={async () => {
-        if (!session?.user) {
-           return await signIn();
-        }
-
-        if (session?.user.subscriptionId) {
-           return manage();
-        } else {
-          return sub();
-        }
-      }}
-    />
-  );
 };
 
 export default Drawer;

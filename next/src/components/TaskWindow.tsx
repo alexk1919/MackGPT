@@ -5,7 +5,7 @@ import { MESSAGE_TYPE_TASK, Task, TASK_STATUS_STARTED } from "../types/agentType
 import { getMessageContainerStyle, getTaskStatusIcon } from "./utils/helpers";
 import { useAgentStore, useMessageStore } from "../stores";
 import { FaListAlt, FaTimesCircle } from "react-icons/fa";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import clsx from "clsx";
 import Input from "./Input";
 import Button from "./Button";
@@ -51,7 +51,7 @@ export const TaskWindow = ({ visibleOnMobile }: TaskWindowProps) => {
               This window will display agent tasks as they are created.
             </p>
           )}
-          <AnimatePresence mode="popLayout">
+          <AnimatePresence>
             {tasks.map((task, i) => (
               <Task key={i} index={i} task={task} />
             ))}

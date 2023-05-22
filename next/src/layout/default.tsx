@@ -2,7 +2,6 @@ import { type ReactNode } from "react";
 import Head from "next/head";
 import DottedGridBackground from "../components/DottedGridBackground";
 import clsx from "clsx";
-import { useTranslation } from "react-i18next";
 
 interface LayoutProps {
   children: ReactNode;
@@ -11,8 +10,7 @@ interface LayoutProps {
 }
 
 const DefaultLayout = (props: LayoutProps) => {
-  const [t] = useTranslation();
-  const description = t("HEADING_DESCRIPTION", { ns: "indexPage" });
+  const description = "Assemble, configure, and deploy autonomous AI Agents in your browser.";
 
   return (
     <div
@@ -51,9 +49,7 @@ const DefaultLayout = (props: LayoutProps) => {
         <meta google-site-verification="jB8mvkTK5qNKPnyEcUE1k6T-7zi2dwKQ48-abLSledg" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <DottedGridBackground
-        className={clsx("min-w-screen min-h-screen", props.className)}
-      >
+      <DottedGridBackground className={clsx("min-w-screen min-h-screen", props.className)}>
         {props.children}
       </DottedGridBackground>
     </div>
