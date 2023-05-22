@@ -3,7 +3,7 @@ import { PromptTemplate } from "langchain/prompts";
 import type { ModelSettings } from "./types";
 import { GPT_35_TURBO } from "./constants";
 
-const getServerSideKey = (): string => {
+export const getServerSideKey = (): string => {
   const keys: string[] = (process.env.OPENAI_API_KEY || "")
     .split(",")
     .map((key) => key.trim())
@@ -20,12 +20,17 @@ export const createModel = (settings: ModelSettings) => {
     _settings = undefined;
   }
 
-  return new OpenAI({
-    openAIApiKey: _settings?.customApiKey || getServerSideKey(),
-    temperature: _settings?.customTemperature || 0.9,
-    modelName: _settings?.customModelName || GPT_35_TURBO,
-    maxTokens: _settings?.maxTokens || 400,
-  });
+  return new OpenAI(
+    {
+      openAIApiKey: _settings?.customApiKey || getServerSideKey(),
+      temperature: _settings?.customTemperature || 0.9,
+      modelName: _settings?.customModelName || GPT_35_TURBO,
+      maxTokens: _settings?.maxTokens || 400,
+    },
+    {
+      basePath: (process.env.OPENAI_API_BASE as string) || undefined,
+    }
+  );
 };
 
 export const startGoalPrompt = new PromptTemplate({
@@ -40,7 +45,7 @@ export const analyzeTaskPrompt = new PromptTemplate({
 
 export const executeTaskPrompt = new PromptTemplate({
   template:
-    'Answer in the "{language}" language. Given the following overall objective `{goal}` and the following sub-task, `{task}`. Perform the task in a detailed manner. If coding is required, provide code in markdown',
+    'Answer in the "{language}" language. Given the following overall objective `{goal}` and the following sub-task, `{task}`. Perform the task and return an adequate response.',
   inputVariables: ["goal", "language", "task"],
 });
 

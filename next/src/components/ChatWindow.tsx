@@ -30,7 +30,6 @@ import { AnimatePresence } from "framer-motion";
 import { CgExport } from "react-icons/cg";
 import MarkdownRenderer from "./MarkdownRenderer";
 import { Switch } from "./Switch";
-import { env } from "../env/client.mjs";
 
 interface ChatWindowProps extends HeaderProps {
   children?: ReactNode;
@@ -67,8 +66,6 @@ const ChatWindow = ({
   const agentMode = useAgentStore.use.agentMode();
   const agent = useAgentStore.use.agent();
   const updateAgentMode = useAgentStore.use.updateAgentMode();
-  const isWebSearchEnabled = useAgentStore.use.isWebSearchEnabled();
-  const setIsWebSearchEnabled = useAgentStore.use.setIsWebSearchEnabled();
 
   const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
     const { scrollTop, scrollHeight, clientHeight } = event.currentTarget;
@@ -89,25 +86,6 @@ const ChatWindow = ({
       }
     }
   });
-
-  useEffect(() => {
-    if (messages.length > 0) {
-      setInitialLoad(false);
-    }
-  }, [messages]);
-
-
-  const handleChangeWebSearch = (value: boolean) => {
-    // Change this value when we can no longer support web search
-    const WEB_SEARCH_ALLOWED = env.NEXT_PUBLIC_WEB_SEARCH_ENABLED;
-
-    if (WEB_SEARCH_ALLOWED) {
-      setIsWebSearchEnabled(value);
-    } else {
-      openSorryDialog?.();
-      setIsWebSearchEnabled(false);
-    }
-  };
 
   const handleUpdateAgentMode = (value: boolean) => {
     updateAgentMode(value ? PAUSE_MODE : AUTOMATIC_MODE);
@@ -187,13 +165,6 @@ const ChatWindow = ({
       </div>
       {displaySettings && (
         <div className="flex flex-row items-center justify-center">
-          <SwitchContainer label="Web Search">
-            <Switch
-              disabled={agent !== null}
-              value={isWebSearchEnabled}
-              onChange={handleChangeWebSearch}
-            />
-          </SwitchContainer>
           <SwitchContainer label={PAUSE_MODE}>
             <Switch
               disabled={agent !== null}
@@ -241,7 +212,7 @@ const ExampleAgentButton = ({
       onClick={handleClick}
     >
       <p className="text-lg font-black">{name}</p>
-      {children}
+      <p className="mt-2 text-sm">{children}</p>
     </div>
   );
 };
@@ -278,7 +249,9 @@ const MacWindowHeader = (props: HeaderProps) => {
         link.download = "MackGPT-Agent.png";
         link.click();
       })
-      .catch(console.error);
+      .catch(() =>
+        alert("Error saving image! Note this doesn't work if the AI generated an image")
+      );
   };
 
   const copyElementText = (elementId: string) => {
@@ -371,24 +344,13 @@ const MacWindowHeader = (props: HeaderProps) => {
               onClick={() => props.onSave?.("db")}
               icon={<FaSave size={12} />}
               name={`${t("SAVE", { ns: "common" })}`}
-              styleClass={{
-                container: `relative bg-[#3a3a3a] md:w-20 text-center font-mono rounded-lg text-gray/50 border-[2px] border-white/30 font-bold transition-all sm:py-0.5 hover:border-[#1E88E5]/40 hover:bg-[#6b6b6b] focus-visible:outline-none focus:border-[#1E88E5]`,
-              }}
+              border
             />
           </PopIn>
         )}
       </AnimatePresence>
 
-      <Menu
-        icon={<CgExport />}
-        name={`${t("EXPORT", { ns: "common" })}`}
-        items={exportOptions}
-        styleClass={{
-          container: "relative",
-          input: `bg-[#3a3a3a] animation-duration text-left py-1 px-2 text-sm font-mono rounded-lg text-gray/50 border-[2px] border-white/30 font-bold transition-all sm:py-0.5 hover:border-[#1E88E5]/40 hover:bg-[#6b6b6b] focus-visible:outline-none focus:border-[#1E88E5]`,
-          option: "w-full py-[1px] md:py-0.5",
-        }}
-      />
+      <Menu icon={<CgExport size={15} />} items={exportOptions} />
     </div>
   );
 };
@@ -397,9 +359,11 @@ const ChatMessage = ({ message }: { message: Message }) => {
 
   return (
     <div
-      className={`${getMessageContainerStyle(
-        message
-      )} mx-2 my-1 rounded-lg border-[2px] bg-white/20 p-1 font-mono text-sm hover:border-[#1E88E5]/40 sm:mx-4 sm:p-3 sm:text-base`}
+      className={clsx(
+        getMessageContainerStyle(message),
+        "mx-2 my-1 rounded-lg border-[1px] bg-white/20 p-2 font-mono text-xs hover:border-[#1E88E5]/40 sm:mx-4 sm:p-3",
+        "sm:my-1.5 sm:text-sm"
+      )}
     >
       {message.type != MESSAGE_TYPE_SYSTEM && (
         // Avoid for system messages as they do not have an icon and will cause a weird space
@@ -459,11 +423,8 @@ const FAQ = () => {
   return (
     <p>
       <br />
-      {/* If you are facing issues, please head over to our{" "}
-      <a
-        href="https://reworkd.github.io/AgentGPT-Documentation/docs/faq"
-        className="text-sky-500"
-      >
+      If you are facing issues, please head over to our{" "}
+      <a href="https://docs.reworkd.ai/faq" className="text-sky-500">
         FAQ
       </a> */}
     </p>

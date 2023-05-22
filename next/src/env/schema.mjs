@@ -5,6 +5,7 @@ const requiredForProduction = () =>
   process.env.NODE_ENV === "production"
     ? z.string().min(1).trim()
     : z.string().min(1).trim().optional();
+
 function stringToBoolean() {
   return z.preprocess((str) => str === "true", z.boolean());
 }
@@ -29,7 +30,6 @@ export const serverSchema = z.object({
     process.env.VERCEL ? z.string() : z.string().url()
   ),
   OPENAI_API_KEY: z.string(),
-
   GOOGLE_CLIENT_ID: z.string().min(1).trim().optional(),
   GOOGLE_CLIENT_SECRET: z.string().min(1).trim().optional(),
   GITHUB_CLIENT_ID: z.string().min(1).trim().optional(),
@@ -37,13 +37,8 @@ export const serverSchema = z.object({
   DISCORD_CLIENT_ID: z.string().min(1).trim().optional(),
   DISCORD_CLIENT_SECRET: z.string().min(1).trim().optional(),
 
-  STRIPE_SECRET_KEY: z.string().optional(),
-  STRIPE_WEBHOOK_SECRET: z.string().optional(),
-  STRIPE_SUBSCRIPTION_PRICE_ID: z.string().optional(),
-
-  UPSTASH_REDIS_REST_URL: z.string().optional(),
-  UPSTASH_REDIS_REST_TOKEN: z.string().optional(),
-  RATE_LIMITER_REQUESTS_PER_MINUTE: stringToNumber().optional()
+  PLATFORM_URL: z.string().url().optional(),
+  OPENAI_API_BASE: z.string().url().optional(),
 });
 
 /**
@@ -64,14 +59,8 @@ export const serverEnv = {
   DISCORD_CLIENT_ID: process.env.DISCORD_CLIENT_ID,
   DISCORD_CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET,
 
-  STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
-  STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
-  STRIPE_SUBSCRIPTION_PRICE_ID: process.env.STRIPE_SUBSCRIPTION_PRICE_ID,
-
-  // Rate limiter
-  UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL,
-  UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN,
-  RATE_LIMITER_REQUESTS_PER_MINUTE: process.env.RATE_LIMITER_REQUESTS_PER_MINUTE
+  PLATFORM_URL: process.env.PLATFORM_URL,
+  OPENAI_API_BASE: process.env.OPENAI_API_BASE,
 };
 
 /**
@@ -81,16 +70,11 @@ export const serverEnv = {
  */
 export const clientSchema = z.object({
   NEXT_PUBLIC_VERCEL_ENV: z.enum(["production", "preview", "development"]),
-  NEXT_PUBLIC_STRIPE_DONATION_ENABLED: z
-    .string()
-    .transform((str) => str === "true")
-    .optional(),
   NEXT_PUBLIC_WEB_SEARCH_ENABLED: stringToBoolean(),
   NEXT_PUBLIC_FORCE_AUTH: stringToBoolean(),
-  NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string().optional(),
-  NEXT_PUBLIC_FF_SUB_ENABLED: stringToBoolean(),
   NEXT_PUBLIC_FF_MOCK_MODE_ENABLED: stringToBoolean(),
-  NEXT_PUBLIC_VERCEL_URL: z.string().optional()
+  NEXT_PUBLIC_VERCEL_URL: z.string().optional(),
+  NEXT_PUBLIC_BACKEND_URL: z.string().url()
 });
 
 /**
@@ -101,15 +85,9 @@ export const clientSchema = z.object({
  */
 export const clientEnv = {
   NEXT_PUBLIC_VERCEL_ENV: process.env.NEXT_PUBLIC_VERCEL_ENV ?? "development",
-  NEXT_PUBLIC_STRIPE_DONATION_ENABLED:
-  process.env.NEXT_PUBLIC_STRIPE_DONATION_ENABLED,
   NEXT_PUBLIC_WEB_SEARCH_ENABLED: process.env.NEXT_PUBLIC_WEB_SEARCH_ENABLED,
   NEXT_PUBLIC_FORCE_AUTH: process.env.NEXT_PUBLIC_FORCE_AUTH,
-  NEXT_PUBLIC_VERCEL_URL:
-    process.env.NEXT_PUBLIC_VERCEL_URL ?? "http://localhost:3000",
-  NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
-  NEXT_PUBLIC_FF_SUB_ENABLED: process.env.NEXT_PUBLIC_FF_SUB_ENABLED,
-  NEXT_PUBLIC_FF_MOCK_MODE_ENABLED:
-  process.env.NEXT_PUBLIC_FF_MOCK_MODE_ENABLED
+  NEXT_PUBLIC_VERCEL_URL: process.env.NEXT_PUBLIC_VERCEL_URL ?? "http://localhost:3000",
+  NEXT_PUBLIC_BACKEND_URL: process.env.NEXT_PUBLIC_BACKEND_URL,
+  NEXT_PUBLIC_FF_MOCK_MODE_ENABLED: process.env.NEXT_PUBLIC_FF_MOCK_MODE_ENABLED
 };
